@@ -1,49 +1,46 @@
-    window.onload = function() {
-        
-        
-        function preload () {
+"use strict";
 
-            //load elbin image
-            game.load.image('logo', 'images/elbin.png');
+function NoMeansNo (pGameEngine) {
+  this.gameEngine = pGameEngine;
 
-        }
-        
-        //variable for score
-        var score = 0;
-        var scoreText;
-        var elbin;
-        var cursors;
+  this.score = 0;
+  this.scoreText;
+  this.elbin;
+  //Keyboard controls
+  this.cursors;
+}
 
-        function create () {
-        
-        //background color
-        game.stage.backgroundColor = '#FFF';
+NoMeansNo.prototype.preload = function() {
+  //load elbin image
+  this.gameEngine.load.image('logo', 'images/elbin.png');
+};
 
-        elbin = this.game.add.sprite(50, game.world.centerY, 'logo');
-        elbin.anchor.setTo(0.5, 0.5);
-            
-        //make elbins face smaller
-        elbin.scale.setTo(0.3, 0.3);
-            
-        //enable physics so elbin can move
-        game.physics.enable(elbin, Phaser.Physics.ARCADE);
-            
-        //Keyboard controls
-        cursors = game.input.keyboard.createCursorKeys();
+NoMeansNo.prototype.create = function() {
+  //background color
+  this.gameEngine.stage.backgroundColor = '#FFF';
 
-        }
-        
-        function update() {
-            
-            if (cursors.right.isDown){
-                //  Move to the right
-                elbin.body.velocity.x = 150;
-            } 
-            else {
-                //Don't move
-                elbin.body.velocity.x = 0;
-            }            
-                        
-        }
+  this.elbin = this.gameEngine.add.sprite(50, this.gameEngine.world.centerY, 'logo');
+  this.elbin.anchor.setTo(0.5, 0.5);
+
+  //make elbins face smaller
+  this.elbin.scale.setTo(0.3, 0.3);
+
+  //enable physics so elbin can move
+  this.gameEngine.physics.enable(this.elbin, Phaser.Physics.ARCADE);
+
+  this.cursors = this.gameEngine.input.keyboard.createCursorKeys();
+
+};
+
+NoMeansNo.prototype.update = function() {
+
+  if (this.cursors.right.isDown){
+      //  Move to the right
+      this.elbin.body.velocity.x = 150;
+  }
+  else {
+      //Don't move
+      this.elbin.body.velocity.x = 0;
+  }
 
 };
