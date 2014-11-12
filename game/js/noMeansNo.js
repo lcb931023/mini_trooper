@@ -37,6 +37,7 @@ NoMeansNo.prototype.create = function() {
 
   //enable physics so elbin can move
   this.gameEngine.physics.enable(this.elbin, Phaser.Physics.ARCADE);
+	this.gameEngine.physics.enable(this.pedobear, Phaser.Physics.ARCADE);
 
   this.cursors = this.gameEngine.input.keyboard.createCursorKeys();
 
@@ -56,12 +57,14 @@ NoMeansNo.prototype.update = function() {
       //Don't move
       this.elbin.body.velocity.x = 0;
   }
-    
-function killElbin (elbin, pedobear) {
-    
-    // Removes elbin from the screen
-    this.elbin.kill();
+  
+	this.pedobear.body.velocity.x = 150;
+		
+  function killElbin (elbin, pedobear) {
 
-}
+		// Removes elbin from the screen
+		this.elbin.kill();
+
+  }
 
 };
