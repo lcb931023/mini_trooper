@@ -1,5 +1,8 @@
 "use strict";
 
+NoMeansNo.prototype = new Minigame();
+NoMeansNo.prototype.constructor = NoMeansNo;
+
 function NoMeansNo (pGameEngine) {
   this.gameEngine = pGameEngine;
 
@@ -16,16 +19,12 @@ NoMeansNo.prototype.preload = function() {
 };
 
 NoMeansNo.prototype.create = function() {
-  //background color
-  this.gameEngine.stage.backgroundColor = '#FFF';
-
   this.elbin = this.gameEngine.add.sprite(50, this.gameEngine.world.centerY, 'logo');
   this.elbin.anchor.setTo(0.5, 0.5);
 
   //make elbins face smaller
   this.elbin.scale.setTo(0.3, 0.3);
 
-  //enable physics so elbin can move
   this.gameEngine.physics.enable(this.elbin, Phaser.Physics.ARCADE);
 
   this.cursors = this.gameEngine.input.keyboard.createCursorKeys();
