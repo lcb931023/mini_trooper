@@ -20,16 +20,20 @@ NoMeansNo.prototype.preload = function() {
   this.gameEngine.load.image('elbin', 'images/elbin.png');
 	this.gameEngine.load.image('pedobear', 'images/pedobear.png');
 	this.gameEngine.load.image('house', 'images/house.png');
+	this.gameEngine.load.image('background', 'images/noMeansNoBG.png');
 };
 
 NoMeansNo.prototype.create = function() {
-  this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY, 'elbin');
+		
+	this.gameEngine.add.sprite(0, 0, 'background');
+		
+  this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY + 65, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
 
-	this.pedobear = this.gameEngine.add.sprite(0, this.gameEngine.world.centerY, 'pedobear');
+	this.pedobear = this.gameEngine.add.sprite(0, this.gameEngine.world.centerY + 65, 'pedobear');
   this.pedobear.anchor.setTo(0.5, 0.5);
 
-	this.house = this.gameEngine.add.sprite(915, (this.gameEngine.world.centerY - 50), 'house');
+	this.house = this.gameEngine.add.sprite(915, (this.gameEngine.world.centerY + 5), 'house');
   this.house.anchor.setTo(0.5, 0.5);
 
   //scale elbins face

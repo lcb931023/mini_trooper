@@ -1,21 +1,23 @@
 "use strict";
 
-function musicMembrane (pGameEngine) {
+MusicMembrane.prototype = new Minigame();
+MusicMembrane.prototype.constructor = MusicMembrane;
+
+function MusicMembrane (pGameEngine) {
   this.gameEngine = pGameEngine;
 }
 
-musicMembrane.prototype.preload = function() {
+MusicMembrane.prototype.preload = function() {
   
 };
 
-musicMembrane.prototype.create = function() {
+MusicMembrane.prototype.create = function() {
   
-	//background color
-  this.gameEngine.stage.backgroundColor = '#434';
+
 
 };
 
-musicMembrane.prototype.update = function() {
+MusicMembrane.prototype.update = function() {
    
 
 };

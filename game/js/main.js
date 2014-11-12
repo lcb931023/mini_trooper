@@ -9,7 +9,7 @@ window.onload = function() {
   });
 
   var noMeansNo = new NoMeansNo(gameEngine);
-	var musicMembrane = new musicMembrane(gameEngine);
+	var musicMembrane = new MusicMembrane(gameEngine);
 
   function preload () {
     noMeansNo.preload();
