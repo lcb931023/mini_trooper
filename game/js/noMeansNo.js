@@ -1,5 +1,8 @@
 "use strict";
 
+NoMeansNo.prototype = new Minigame();
+NoMeansNo.prototype.constructor = NoMeansNo;
+
 function NoMeansNo (pGameEngine) {
   this.gameEngine = pGameEngine;
 
@@ -20,15 +23,12 @@ NoMeansNo.prototype.preload = function() {
 };
 
 NoMeansNo.prototype.create = function() {
-  //background color
-  this.gameEngine.stage.backgroundColor = '#FFF';
-
   this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
-	
+
 	this.pedobear = this.gameEngine.add.sprite(0, this.gameEngine.world.centerY, 'pedobear');
   this.pedobear.anchor.setTo(0.5, 0.5);
-	
+
 	this.house = this.gameEngine.add.sprite(915, (this.gameEngine.world.centerY - 50), 'house');
   this.house.anchor.setTo(0.5, 0.5);
 
@@ -45,32 +45,31 @@ NoMeansNo.prototype.create = function() {
 };
 
 NoMeansNo.prototype.update = function() {
-   
+
 	 //Pedobear hits player
-   this.gameEngine.physics.arcade.overlap(this.elbin, this.pedobear, killElbin, null, this);
-   //Player hits house
+	 this.gameEngine.physics.arcade.overlap(this.elbin, this.pedobear, killElbin, null, this);
+	 //Player hits house
 	 this.gameEngine.physics.arcade.overlap(this.elbin, this.house, liveElbin, null, this);
 
-  if (this.cursors.right.isDown){
-      //  Move to the right
-      this.elbin.body.velocity.x = 150;
-  }
-  else {
-      //Don't move
-      this.elbin.body.velocity.x = 0;
-  }
-  
-	this.pedobear.body.velocity.x = 150;
-		
-  function killElbin (elbin, pedobear) {
-		console.log("Elbin is dead");
-		// Removes elbin from the screen
-		this.elbin.kill();
+		if (this.cursors.right.isDown){
+			//  Move to the right
+			this.elbin.body.velocity.x = 150;
+		}
+		else {
+			//Don't move
+			this.elbin.body.velocity.x = 0;
+		}
 
-  }
-	
-	function liveElbin (elbin, house) {
-		console.log("Elbin is alive");
-  }
+		this.pedobear.body.velocity.x = 150;
+
+		function killElbin (elbin, pedobear) {
+			console.log("Elbin is dead");
+			// Removes elbin from the screen
+			this.elbin.kill();
+		}
+
+		function liveElbin (elbin, house) {
+			console.log("Elbin is alive");
+		}
 
 };
