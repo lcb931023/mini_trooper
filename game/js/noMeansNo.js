@@ -22,8 +22,8 @@ NoMeansNo.prototype.create = function() {
   this.elbin = this.gameEngine.add.sprite(50, this.gameEngine.world.centerY, 'logo');
   this.elbin.anchor.setTo(0.5, 0.5);
 
-  //make elbins face smaller
-  this.elbin.scale.setTo(0.3, 0.3);
+  //scale elbins face
+  this.elbin.scale.setTo(1, 1);
 
   //enable physics so elbin can move
   this.gameEngine.physics.enable(this.elbin, Phaser.Physics.ARCADE);
@@ -33,6 +33,10 @@ NoMeansNo.prototype.create = function() {
 };
 
 NoMeansNo.prototype.update = function() {
+    
+   //  Collide the player and the stars with the platforms
+   this.gameEngine.physics.arcade.overlap(this.elbin, this.pedobear, killElbin, null, this);
+    
 
   if (this.cursors.right.isDown){
       //  Move to the right
@@ -42,5 +46,12 @@ NoMeansNo.prototype.update = function() {
       //Don't move
       this.elbin.body.velocity.x = 0;
   }
+    
+function killElbin (elbin, pedobear) {
+    
+    // Removes elbin from the screen
+    this.elbin.kill();
+
+}
 
 };
