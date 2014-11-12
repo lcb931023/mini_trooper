@@ -38,16 +38,18 @@ NoMeansNo.prototype.create = function() {
   //enable physics so elbin can move
   this.gameEngine.physics.enable(this.elbin, Phaser.Physics.ARCADE);
 	this.gameEngine.physics.enable(this.pedobear, Phaser.Physics.ARCADE);
+	this.gameEngine.physics.enable(this.house, Phaser.Physics.ARCADE);
 
   this.cursors = this.gameEngine.input.keyboard.createCursorKeys();
 
 };
 
 NoMeansNo.prototype.update = function() {
-    
-   //  Collide the player and the stars with the platforms
+   
+	 //Pedobear hits player
    this.gameEngine.physics.arcade.overlap(this.elbin, this.pedobear, killElbin, null, this);
-    
+   //Player hits house
+	 this.gameEngine.physics.arcade.overlap(this.elbin, this.house, liveElbin, null, this);
 
   if (this.cursors.right.isDown){
       //  Move to the right
@@ -61,10 +63,14 @@ NoMeansNo.prototype.update = function() {
 	this.pedobear.body.velocity.x = 150;
 		
   function killElbin (elbin, pedobear) {
-
+		console.log("Elbin is dead");
 		// Removes elbin from the screen
 		this.elbin.kill();
 
+  }
+	
+	function liveElbin (elbin, house) {
+		console.log("Elbin is alive");
   }
 
 };
