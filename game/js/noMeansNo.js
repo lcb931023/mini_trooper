@@ -10,12 +10,12 @@ function NoMeansNo (pGameEngine) {
   this.outcome = 0;
 
   this.score = 0;
-  this.scoreText;
+
+  this.bg;
+  this.scoreText; // [TODO] implement
   this.elbin;
 	this.pedobear;
 	this.house;
-  //Keyboard controls
-  this.cursors;
 	//button
 	this.runBtn;
 }
@@ -33,7 +33,7 @@ NoMeansNo.prototype.preload = function() {
 
 NoMeansNo.prototype.create = function() {
 
-	this.gameEngine.add.sprite(0, 0, 'background');
+	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 
 	//button actions event handlers
 	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 400, 'button', actionOnClick, this, 1, 0);
@@ -56,9 +56,6 @@ NoMeansNo.prototype.create = function() {
   this.gameEngine.physics.enable(this.elbin, Phaser.Physics.ARCADE);
 	this.gameEngine.physics.enable(this.pedobear, Phaser.Physics.ARCADE);
 	this.gameEngine.physics.enable(this.house, Phaser.Physics.ARCADE);
-
-  //Stop the following keys from propagating up to the browser
-  this.gameEngine.input.keyboard.addKeyCapture([ Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT, Phaser.Keyboard.SPACEBAR ]);
 
 	//CONSTANT
 	this.elbin.body.velocity.x = 50;
@@ -89,4 +86,18 @@ NoMeansNo.prototype.update = function() {
 //button action functions
 function actionOnClick(){
 	this.elbin.body.velocity.x += 10;
+}
+
+NoMeansNo.prototype.destroy = function() {
+  // Reset vars
+  this.score = 0;
+  this.outcome = 0;
+  // Detach listeners
+    // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
+  // Remove elements
+  this.bg.destroy();
+  this.elbin.destroy();
+  this.pedobear.destroy();
+  this.house.destroy();
+  this.runBtn.destroy();
 }

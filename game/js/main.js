@@ -10,28 +10,24 @@ window.onload = function() {
   // Minigame init
   var miniGames = [
     new NoMeansNo(gameEngine),
-    new MusicMembrane(gameEngine)
+    //new MusicMembrane(gameEngine)
   ];
-  var noMeansNo = new NoMeansNo(gameEngine);
-	var musicMembrane = new MusicMembrane(gameEngine);
 
   /* Start screen setup */
+  var gameStarted = false;
 	var titleText = "Mini Trooper";
 	var titleStyle = {font: "70px Arial", fill:"#000", align:"center" };
 	var startBtn;
 
-	//ARRAY OF ALL MINI GAMES
-	var miniGames = ["noMeansNo", "musicMembrane", "nyanRace"];
-
 	//Keeps track of what mini game is randomly selected
-	var currentMiniGame;
+	var iCurGame;
 
   //preload all minigames + start screen button
 	function preload () {
-    noMeansNo.preload();
-	  musicMembrane.preload();
-
-		gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
+    gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
+    for (var i=0; i<miniGames.length; i++) {
+      miniGames[i].preload();
+    }
   }
 
   function create () {
@@ -45,33 +41,38 @@ window.onload = function() {
   }
 
 	function startFunction () {
-
 		//randomly select mini game
-		var randomMiniGame = Math.floor(Math.random() * miniGames.length);
+		iCurGame = Math.floor(Math.random() * miniGames.length);
 
-		//set current MiniGame to currentMiniGame
-		currentMiniGame = miniGames[randomMiniGame];
-
-		/* IF currentMiniGame == "noMeansNo" */
-		currentMiniGame = "noMeansNo";
-		noMeansNo.create();
-
-		/* IF currentMiniGame == "musicMembrane" etc... */
-
-
+		miniGames[iCurGame].create();
+    gameStarted = true;
 	}
 
   function update() {
-
-		if (currentMiniGame == "noMeansNo"){
-			noMeansNo.update();
-      if (noMeansNo.outcome == 1) {
+    if (gameStarted)
+    {
+      miniGames[iCurGame].update();
+      if (miniGames[iCurGame].outcome == 1) {
         // something happen after win
-      } else if (noMeansNo.outcome == -1) {
+        gotoNextGame();
+      } else if (miniGames[iCurGame].outcome == -1) {
         // something happen after lose
+        gotoNextGame();
       }
-		}
+    }
+  }
 
+  function gotoNextGame() {
+    console.log("Game " + iCurGame + " is finished.");
+    miniGames[iCurGame].destroy();
+
+    var iNewGame = Math.floor(Math.random() * miniGames.length);
+    // Uncomment this after we get another game workin
+    // while (iNewGame == iCurGame) { iNewGame = Math.floor(Math.random() * miniGames.length); }
+    iCurGame = iNewGame;
+
+    miniGames[iCurGame].create();
+    console.log("Starting game " + iCurGame + ".");
   }
 
 };
