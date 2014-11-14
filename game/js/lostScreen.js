@@ -18,10 +18,10 @@ LostScreen.prototype.preload = function() {
 
 LostScreen.prototype.create = function() {
   this.bg = this.gameEngine.add.sprite(0,0,'lostBG');
-  this.againBtn = this.gameEngine.add.sprite(gameEngine.world.centerX, 415, 'againBtn');
+  this.againBtn = this.gameEngine.add.sprite(this.gameEngine.world.centerX, 415, 'againBtn');
   this.againBtn.anchor.set(0.5);
 	this.againBtn.inputEnabled = true;
-	this.againBtn.events.onInputDown.add(f(){this.done = true},this);
+	this.againBtn.events.onInputDown.add(function f(){this.done = true;},this);
 };
 
 LostScreen.prototype.update = function() {

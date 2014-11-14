@@ -15,8 +15,8 @@ window.onload = function() {
     //new MusicMembrane(gameEngine)
   ];
 
-  var winScreen = new WinScreen(gameEngine),
-  var lostScreen = new LostScreen(gameEngine)
+  var winScreen = new WinScreen(gameEngine);
+  var lostScreen = new LostScreen(gameEngine);
 
   // Game State Machine
   var GS = {
@@ -44,9 +44,8 @@ window.onload = function() {
       miniGames[i].preload();
     }
 
-    for (var i=0; i< screens.length; i++) {
-      screens[i].preload();
-    }
+    winScreen.preload();
+    lostScreen.preload();
 
   }
 
