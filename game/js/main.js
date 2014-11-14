@@ -68,7 +68,7 @@ window.onload = function() {
 			noMeansNo.update();
       if (noMeansNo.outcome == 1) {
         // something happen after win
-      } else if (noMeasNo.outcome == -1) {
+      } else if (noMeansNo.outcome == -1) {
         // something happen after lose
       }
 		}
