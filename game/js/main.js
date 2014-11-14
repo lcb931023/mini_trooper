@@ -14,8 +14,7 @@ window.onload = function() {
 	var titleText = "Mini Trooper";
 	var titleStyle = {font: "70px Arial", fill:"#000", align:"center" };
 	
-	var startText = "Press S to Start";
-	var startStyle = {font: "40px Arial", fill:"#000", align:"center" };
+	var startBtn;
 	
 	 //Keyboard controls
   var startKey;
@@ -26,10 +25,12 @@ window.onload = function() {
 	//Keeps track of what mini game is randomly selected
 	var currentMiniGame;
 
-  //preload all minigames
+  //preload all minigames + start screen button
 	function preload () {
     noMeansNo.preload();
 	  musicMembrane.preload();
+		
+		gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
   }
 
   function create () {
@@ -38,11 +39,8 @@ window.onload = function() {
     
 		var title = gameEngine.add.text(gameEngine.world.centerX - 190, gameEngine.world.centerY - 100, titleText, titleStyle);
 		
-		var start = gameEngine.add.text(gameEngine.world.centerX - 225, gameEngine.world.centerY + 100, startText, startStyle);
-		
-		
-		startKey = gameEngine.input.keyboard.addKey(Phaser.Keyboard.S);
-		startKey.onDown.add(startFunction, this);
+		startBtn = gameEngine.add.button(gameEngine.world.centerX - 225, gameEngine.world.centerY + 100, 'button', startFunction, this, 1, 0);
+	
   }
 	
 	function startFunction () {
