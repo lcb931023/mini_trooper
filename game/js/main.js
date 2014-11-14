@@ -10,6 +10,7 @@ window.onload = function() {
   // Minigame init
   var noMeansNo = new NoMeansNo(gameEngine);
 	var musicMembrane = new MusicMembrane(gameEngine);
+	var nyanRace = new NyanRace(gameEngine);
 
   /* Start screen setup */
 	var titleText = "Mini Trooper";
@@ -26,6 +27,7 @@ window.onload = function() {
 	function preload () {
     noMeansNo.preload();
 	  musicMembrane.preload();
+		nyanRace.preload();
 
 		gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
   }
@@ -49,11 +51,13 @@ window.onload = function() {
 		currentMiniGame = miniGames[randomMiniGame];
 
 		/* IF currentMiniGame == "noMeansNo" */
-		currentMiniGame = "noMeansNo";
-		noMeansNo.create();
+		//currentMiniGame = "noMeansNo";
+		//noMeansNo.create();
 
 		/* IF currentMiniGame == "musicMembrane" etc... */
-
+		
+		currentMiniGame = "nyanRace";
+		nyanRace.create();
 
 	}
 
@@ -61,6 +65,15 @@ window.onload = function() {
 
 		if (currentMiniGame == "noMeansNo"){
 			noMeansNo.update();
+      if (noMeansNo.outcome == 1) {
+        // something happen after win
+      } else if (noMeansNo.outcome == -1) {
+        // something happen after lose
+      }
+		}
+		
+		if (currentMiniGame == "nyanRace"){
+			nyanRace.update();
       if (noMeansNo.outcome == 1) {
         // something happen after win
       } else if (noMeansNo.outcome == -1) {
