@@ -28,9 +28,11 @@ window.onload = function() {
 	function preload () {
 
     gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
-    for (var i=0; i<miniGames.length; i++) {
+		
+    for (var i=0; i< miniGames.length; i++) {
       miniGames[i].preload();
     }
+
   }
 
   function create () {
