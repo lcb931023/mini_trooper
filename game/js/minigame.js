@@ -15,3 +15,7 @@ Minigame.prototype.create = function() {
 Minigame.prototype.update = function() {
 
 };
+
+Minigame.prototype.destroy = function() {
+  
+};
