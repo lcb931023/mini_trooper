@@ -15,8 +15,19 @@ window.onload = function() {
     //new MusicMembrane(gameEngine)
   ];
 
+  var winScreen = new WinScreen(gameEngine),
+  var lostScreen = new LostScreen(gameEngine)
+
+  // Game State Machine
+  var GS = {
+    TITLE_SCREEN: 1,
+    GAMING: 2,
+    WON: 3,
+    LOST: 4
+  };
+  var gameState = GS.TITLE_SCREEN;
+
   /* Start screen setup */
-  var gameStarted = false;
 	var titleText = "Mini Trooper";
 	var titleStyle = {font: "70px Arial", fill:"#000", align:"center" };
 	var startBtn;
@@ -28,9 +39,13 @@ window.onload = function() {
 	function preload () {
 
     gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
-		
+
     for (var i=0; i< miniGames.length; i++) {
       miniGames[i].preload();
+    }
+
+    for (var i=0; i< screens.length; i++) {
+      screens[i].preload();
     }
 
   }
@@ -50,35 +65,60 @@ window.onload = function() {
 		iCurGame = Math.floor(Math.random() * miniGames.length);
 
 		miniGames[iCurGame].create();
-    gameStarted = true;
+    gameState = GS.GAMING;
 		startBtn.destroy();
 	}
 
   function update() {
-    if (gameStarted)
+    if (gameState == GS.GAMING)
     {
       miniGames[iCurGame].update();
       if (miniGames[iCurGame].outcome == 1) {
-        // something happen after win
-        gotoNextGame();
+        gameWon();
       } else if (miniGames[iCurGame].outcome == -1) {
-        // something happen after lose
+        gameLost();
+      }
+    } else if (gameState == GS.WON) {
+      if (winScreen.done) {
+        winScreen.destroy();
+        gotoNextGame();
+      }
+    } else if (gameState == GS.LOST) {
+      if (lostScreen.done) {
+        lostScreen.destroy();
         gotoNextGame();
       }
     }
   }
 
-  function gotoNextGame() {
+  function gameWon() {
+    destroyCurrentGame();
+    winScreen.create();
+    gameState = GS.WON;
+  }
+
+  function gameLost() {
+    destroyCurrentGame();
+    lostScreen.create();
+    gameState = GS.LOST;
+  }
+
+  function destroyCurrentGame() {
     console.log("Game " + iCurGame + " is finished.");
     miniGames[iCurGame].destroy();
+  }
 
+  function gotoNextGame() {
     var iNewGame = Math.floor(Math.random() * miniGames.length);
-    // Uncomment this after we get another game workin
-    // while (iNewGame == iCurGame) { iNewGame = Math.floor(Math.random() * miniGames.length); }
+    // Avoid same game
+    // if (miniGames.length > 1)
+    //   while (iNewGame == iCurGame)
+    //     { iNewGame = Math.floor(Math.random() * miniGames.length); }
     iCurGame = iNewGame;
 
     miniGames[iCurGame].create();
     console.log("Starting game " + iCurGame + ".");
+    gameState = GS.GAMING;
   }
 
 };
