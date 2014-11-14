@@ -10,12 +10,12 @@ function NoMeansNo (pGameEngine) {
   this.outcome = 0;
 
   this.score = 0;
-  this.scoreText;
+
+  this.bg;
+  this.scoreText; // [TODO] implement
   this.elbin;
 	this.pedobear;
 	this.house;
-  //Keyboard controls
-  this.cursors;
 	//button
 	this.runBtn;
 }
@@ -32,10 +32,10 @@ NoMeansNo.prototype.preload = function() {
 
 NoMeansNo.prototype.create = function() {
 
-	this.gameEngine.add.sprite(0, 0, 'background');
+	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 
 	//button actions event handlers
-	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 400, 'button', actionOnClick, this, 1, 0);
+	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', actionOnClick, this, 1, 0);
 
   this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY + 65, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
@@ -56,11 +56,9 @@ NoMeansNo.prototype.create = function() {
 	this.gameEngine.physics.enable(this.pedobear, Phaser.Physics.ARCADE);
 	this.gameEngine.physics.enable(this.house, Phaser.Physics.ARCADE);
 
-  //Stop the following keys from propagating up to the browser
-  this.gameEngine.input.keyboard.addKeyCapture([ Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT, Phaser.Keyboard.SPACEBAR ]);
-
 	//CONSTANT
 	this.elbin.body.velocity.x = 50;
+	this.pedobear.body.velocity.x = 150;
 };
 
 NoMeansNo.prototype.update = function() {
@@ -69,10 +67,9 @@ NoMeansNo.prototype.update = function() {
 	//Player hits house
 	this.gameEngine.physics.arcade.overlap(this.elbin, this.house, liveElbin, null, this);
 
-	this.pedobear.body.velocity.x = 150;
-
 	function killElbin (elbin, pedobear) {
 		console.log("Elbin is dead");
+		this.pedobear.body.velocity.x = 0;
 		// Removes elbin from the screen
 		this.elbin.kill();
     this.outcome = -1;
@@ -88,4 +85,18 @@ NoMeansNo.prototype.update = function() {
 //button action functions
 function actionOnClick(){
 	this.elbin.body.velocity.x += 10;
+}
+
+NoMeansNo.prototype.destroy = function() {
+  // Reset vars
+  this.score = 0;
+  this.outcome = 0;
+  // Detach listeners
+    // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
+  // Remove elements
+  this.bg.destroy();
+  this.elbin.destroy();
+  this.pedobear.destroy();
+  this.house.destroy();
+  this.runBtn.destroy();
 }
