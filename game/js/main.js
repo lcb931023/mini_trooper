@@ -47,6 +47,7 @@ window.onload = function() {
 		miniGames[iCurGame].create();
     gameStarted = true;
 		startBtn.destroy();
+		startBg.destroy();
 	}
 
   function update() {
