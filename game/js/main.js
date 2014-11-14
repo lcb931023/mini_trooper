@@ -98,7 +98,6 @@ window.onload = function() {
   }
 
   function destroyCurrentGame() {
-    console.log("Game " + iCurGame + " is finished.");
     miniGames[iCurGame].destroy();
   }
 
@@ -111,7 +110,6 @@ window.onload = function() {
     iCurGame = iNewGame;
 
     miniGames[iCurGame].create();
-    console.log("Starting game " + iCurGame + ".");
     gameState = GS.GAMING;
   }
 

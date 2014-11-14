@@ -68,7 +68,6 @@ NoMeansNo.prototype.update = function() {
 	this.gameEngine.physics.arcade.overlap(this.elbin, this.house, liveElbin, null, this);
 
 	function killElbin (elbin, pedobear) {
-		console.log("Elbin is dead");
 		this.pedobear.body.velocity.x = 0;
 		// Removes elbin from the screen
 		this.elbin.kill();
@@ -76,7 +75,6 @@ NoMeansNo.prototype.update = function() {
 	}
 
 	function liveElbin (elbin, house) {
-		console.log("Elbin is alive");
     this.outcome = 1;
 	}
 

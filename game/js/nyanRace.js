@@ -74,7 +74,6 @@ NyanRace.prototype.create = function() {
 
 	//randomly select nyan cat color game
 	var randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
-	console.log(randomColor);
 
 	this.nyanCat = this.gameEngine.add.sprite(-50, this.gameEngine.world.centerY - 100, randomColor);
 	this.nyanCat.color = randomColor;
@@ -84,7 +83,6 @@ NyanRace.prototype.create = function() {
 	var xLoc = 100;
 
 	for(var i = 0; i < 7; i++){
-		console.log(this.colors[i]);
 		this.buttons[i] = this.gameEngine.add.sprite(xLoc, 450, this.colors[i]);
 		this.buttons[i].anchor.set(0.5);
 		this.buttons[i].inputEnabled = true;
@@ -92,7 +90,6 @@ NyanRace.prototype.create = function() {
 		this.buttons[i].anchor.setTo(0.5, 0.5);
 		this.buttons[i].scale.setTo(0.3, 0.3);
 		xLoc += 115;
-		console.log(this.buttons[i]);
 	}
 
 	this.createTwinkles();
