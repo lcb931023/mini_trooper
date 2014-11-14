@@ -28,8 +28,7 @@ window.onload = function() {
   var gameState = GS.TITLE_SCREEN;
 
   /* Start screen setup */
-	var titleText = "Mini Trooper";
-	var titleStyle = {font: "70px Arial", fill:"#000", align:"center" };
+	var startBg;
 	var startBtn;
 
 	//Keeps track of what mini game is randomly selected
@@ -37,26 +36,21 @@ window.onload = function() {
 
   //preload all minigames + start screen button
 	function preload () {
-
-    gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
-
+		gameEngine.load.image('startBg', 'images/startPg_bg.png');
+    gameEngine.load.image('startBtn', 'images/startBtn.png');
     for (var i=0; i< miniGames.length; i++) {
       miniGames[i].preload();
     }
-
     winScreen.preload();
     lostScreen.preload();
-
   }
 
   function create () {
-
-		gameEngine.stage.backgroundColor = '#FFF';
-
-		var title = gameEngine.add.text(gameEngine.world.centerX - 190, gameEngine.world.centerY - 100, titleText, titleStyle);
-
-		startBtn = gameEngine.add.button(gameEngine.world.centerX - 315, 415, 'button', startFunction, this, 1, 0);
-
+		startBg = gameEngine.add.sprite(0,0,'startBg');
+		startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
+		startBtn.anchor.set(0.5);
+		startBtn.inputEnabled = true;
+		startBtn.events.onInputDown.add(startFunction,this);
   }
 
 	function startFunction () {
