@@ -58,7 +58,7 @@ NoMeansNo.prototype.create = function() {
 
 	//CONSTANT
 	this.elbin.body.velocity.x = 50;
-	this.pedobear.body.velocity.x = 150;
+	this.pedobear.body.velocity.x = 75;
 };
 
 NoMeansNo.prototype.update = function() {

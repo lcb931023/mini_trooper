@@ -119,7 +119,7 @@ NyanRace.prototype.update = function() {
 	}
 
 	if(this.moveNyanCat == true){
-		this.nyanCat.body.velocity.x = 2000;
+		this.nyanCat.body.velocity.x = 1000;
 	}
 
 	if(this.nyanCat.x > 1000){
