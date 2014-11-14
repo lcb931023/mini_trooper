@@ -36,7 +36,7 @@ window.onload = function() {
 
 		var title = gameEngine.add.text(gameEngine.world.centerX - 190, gameEngine.world.centerY - 100, titleText, titleStyle);
 
-		startBtn = gameEngine.add.button(gameEngine.world.centerX - 225, gameEngine.world.centerY + 100, 'button', startFunction, this, 1, 0);
+		startBtn = gameEngine.add.button(gameEngine.world.centerX - 315, 415, 'button', startFunction, this, 1, 0);
 
   }
 
