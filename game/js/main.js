@@ -60,6 +60,7 @@ window.onload = function() {
 		miniGames[iCurGame].create();
     gameState = GS.GAMING;
 		startBtn.destroy();
+		startBg.destroy();
 	}
 
   function update() {
