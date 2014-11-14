@@ -26,7 +26,8 @@ NoMeansNo.prototype.preload = function() {
 	this.gameEngine.load.image('house', 'images/house.png');
 	this.gameEngine.load.image('background', 'images/noMeansNoBG.png');
 
-	this.gameEngine.load.image('pedobear', 'images/pedobear_sprite.png', 26, 55);
+
+	this.gameEngine.load.spritesheet('pedobear', 'images/pedobear_sprite.png', 40, 54, 6);
 	this.gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
 };
 
@@ -42,6 +43,8 @@ NoMeansNo.prototype.create = function() {
 
 	this.pedobear = this.gameEngine.add.sprite(0, this.gameEngine.world.centerY + 65, 'pedobear');
   this.pedobear.anchor.setTo(0.5, 0.5);
+	this.pedobear.animations.add('run');
+	this.pedobear.animations.play('run', 12, true);
 
 	this.house = this.gameEngine.add.sprite(915, (this.gameEngine.world.centerY + 5), 'house');
   this.house.anchor.setTo(0.5, 0.5);
