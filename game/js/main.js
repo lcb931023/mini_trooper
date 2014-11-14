@@ -27,8 +27,7 @@ window.onload = function() {
 	function preload () {
 		gameEngine.load.image('startBg', 'images/startPg_bg.png');
     gameEngine.load.image('startBtn', 'images/startBtn.png');
-		
-    for (var i=0; i<miniGames.length; i++) {
+    for (var i=0; i< miniGames.length; i++) {
       miniGames[i].preload();
     }
   }
