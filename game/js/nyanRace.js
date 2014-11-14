@@ -22,14 +22,34 @@ function NyanRace (pGameEngine) {
 		"Yellow"
 	];
 	
+	this.buttons = [];
+	
+	this.btnFunc = [
+		"pressBlue",
+		"pressGreen",
+		"pressIndigo",
+		"pressOrange",
+		"pressRed",
+		"pressViolet",
+		"pressYellow"
+	];
+	
   this.nyanCat;
-	this.colorButton;
 	this.counterTitle;
 	this.timer;
 	this.moveNyanCat = false;
 	
 	this.counter = 3;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
+	
+	this.blueBtn;
+	this.greenBtn;
+	this.indigoBtn;
+	this.orangeBtn;
+	this.redBtn;
+	this.violetBtn;
+	this.yellowBtn;
+	
 }
 
 NyanRace.prototype.preload = function() {
@@ -61,11 +81,25 @@ NyanRace.prototype.create = function() {
 	
 	this.nyanCat.scale.setTo(0.5, 0.5);
 	
-   this.timer = this.gameEngine.time.create(false);
-   this.timer.loop(1000, countdown, this);
-	 this.timer.start();
+	var xLoc = 100;
+	
+	for(var i = 0; i < 7; i++){
+		console.log(this.colors[i]);
+		this.buttons[i] = this.gameEngine.add.sprite(xLoc, 450, this.colors[i]);
+		this.buttons[i].anchor.set(0.5);
+		this.buttons[i].inputEnabled = true;
+		this.buttons[i].events.onInputDown.add(eval(this.btnFunc[i]),this);
+		this.buttons[i].anchor.setTo(0.5, 0.5);
+		this.buttons[i].scale.setTo(0.3, 0.3);
+		xLoc += 115;
+		console.log(this.buttons[i]);
+	}
 	
 	this.gameEngine.physics.enable(this.nyanCat, Phaser.Physics.ARCADE);
+	
+	 this.timer = this.gameEngine.time.create(false);
+   this.timer.loop(1000, countdown, this);
+	 this.timer.start();
 	
 };
 
@@ -87,5 +121,80 @@ NyanRace.prototype.update = function() {
 		if(this.moveNyanCat == true){
 			 this.nyanCat.body.velocity.x = 2000;
 		}
+	
+		if(this.nyanCat.x > 1000){
+			this.outcome = -1;
+		}
 
 };
+
+function pressBlue(){
+		if(this.nyanCat.color = "Blue"){
+			this.outcome = 1;
+		} else {
+			this.outcome = -1;
+		}
+}
+
+function pressGreen(){
+		if(this.nyanCat.color = "Blue"){
+			this.outcome = 1;
+		} else {
+			this.outcome = -1;
+		}
+}
+
+function pressIndigo(){
+		if(this.nyanCat.color = "Blue"){
+			this.outcome = 1;
+		} else {
+			this.outcome = -1;
+		}
+}
+
+function pressRed(){
+		if(this.nyanCat.color = "Blue"){
+			this.outcome = 1;
+		} else {
+			this.outcome = -1;
+		}
+}
+
+function pressOrange(){
+		if(this.nyanCat.color = "Blue"){
+			this.outcome = 1;
+		} else {
+			this.outcome = -1;
+		}
+}
+
+function pressViolet(){
+		if(this.nyanCat.color = "Blue"){
+			this.outcome = 1;
+		} else {
+			this.outcome = -1;
+		}
+}
+
+function pressYellow(){
+		if(this.nyanCat.color = "Blue"){
+			this.outcome = 1;
+		} else {
+			this.outcome = -1;
+		}
+}
+
+NyanRace.prototype.destroy = function() {
+  // Reset vars
+  this.score = 0;
+  this.outcome = 0;
+  // Detach listeners
+    // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
+  // Remove elements
+  this.nyanCat.destroy();
+  this.counterTitle.destroy();
+  this.timer.destroy();
+	this.moveNyanCat = false;
+	this.counter = 3;
+	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
+}
