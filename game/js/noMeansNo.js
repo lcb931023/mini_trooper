@@ -5,6 +5,9 @@ NoMeansNo.prototype.constructor = NoMeansNo;
 
 function NoMeansNo (pGameEngine) {
   this.gameEngine = pGameEngine;
+  // [TODO] enum
+  // 0 = ongoing, 1 = won, -1 = lost
+  this.outcome = 0;
 
   this.score = 0;
   this.scoreText;
@@ -22,25 +25,26 @@ NoMeansNo.prototype.preload = function() {
   this.gameEngine.load.image('elbin', 'images/elbin.png');
 	this.gameEngine.load.image('house', 'images/house.png');
 	this.gameEngine.load.image('background', 'images/noMeansNoBG.png');
-	
-	this.gameEngine.load.spritesheet('pedobear', 'images/pedobear_sprite.png', 26, 55);
+
+
+	this.gameEngine.load.spritesheet('pedobear', 'images/pedobear_sprite.png', 40, 54, 6);
 	this.gameEngine.load.spritesheet('button', 'images/button_sprite.png', 630,125);
 };
 
 NoMeansNo.prototype.create = function() {
-		
+
 	this.gameEngine.add.sprite(0, 0, 'background');
-	
+
 	//button actions event handlers
 	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 400, 'button', actionOnClick, this, 1, 0);
-	
+
   this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY + 65, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
 
 	this.pedobear = this.gameEngine.add.sprite(0, this.gameEngine.world.centerY + 65, 'pedobear');
   this.pedobear.anchor.setTo(0.5, 0.5);
 	this.pedobear.animations.add('run');
-	this.pedobear.animations.play('run', 20, true);
+	this.pedobear.animations.play('run', 12, true);
 
 	this.house = this.gameEngine.add.sprite(915, (this.gameEngine.world.centerY + 5), 'house');
   this.house.anchor.setTo(0.5, 0.5);
@@ -52,10 +56,10 @@ NoMeansNo.prototype.create = function() {
   this.gameEngine.physics.enable(this.elbin, Phaser.Physics.ARCADE);
 	this.gameEngine.physics.enable(this.pedobear, Phaser.Physics.ARCADE);
 	this.gameEngine.physics.enable(this.house, Phaser.Physics.ARCADE);
-	
+
   //Stop the following keys from propagating up to the browser
   this.gameEngine.input.keyboard.addKeyCapture([ Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT, Phaser.Keyboard.SPACEBAR ]);
-	
+
 	//CONSTANT
 	this.elbin.body.velocity.x = 50;
 };
@@ -66,16 +70,18 @@ NoMeansNo.prototype.update = function() {
 	//Player hits house
 	this.gameEngine.physics.arcade.overlap(this.elbin, this.house, liveElbin, null, this);
 
-	//this.pedobear.body.velocity.x = 150;
+	this.pedobear.body.velocity.x = 150;
 
 	function killElbin (elbin, pedobear) {
 		console.log("Elbin is dead");
 		// Removes elbin from the screen
 		this.elbin.kill();
+    this.outcome = -1;
 	}
 
 	function liveElbin (elbin, house) {
 		console.log("Elbin is alive");
+    this.outcome = 1;
 	}
 
 };
