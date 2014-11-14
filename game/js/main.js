@@ -7,13 +7,13 @@ window.onload = function() {
     create: create,
     update: update
   });
-
+  // Minigame init
   var noMeansNo = new NoMeansNo(gameEngine);
 	var musicMembrane = new MusicMembrane(gameEngine);
 
+  /* Start screen setup */
 	var titleText = "Mini Trooper";
 	var titleStyle = {font: "70px Arial", fill:"#000", align:"center" };
-
 	var startText = "Press S to Start";
 	var startStyle = {font: "40px Arial", fill:"#000", align:"center" };
 
