@@ -1,4 +1,3 @@
-# Mac crap
 .DS_Store
-# Windows crap
 Thumbs.db
+npm-debug.log
