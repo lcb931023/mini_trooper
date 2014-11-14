@@ -17,8 +17,7 @@ window.onload = function() {
   }
 
   function create () {
-    gameEngine.stage.backgroundColor = '#FFF';
-    
+    gameEngine.stage.backgroundColor = '#FFF'; 
     noMeansNo.create();
 		musicMembrane.create();
   }
