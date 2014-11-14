@@ -10,7 +10,7 @@ function NyanRace (pGameEngine) {
   this.outcome = 0;
   this.score = 0;
   this.scoreText;
-	
+
 	this.colors = [
 		"Blue",
 		"Green",
@@ -20,9 +20,9 @@ function NyanRace (pGameEngine) {
 		"Violet",
 		"Yellow"
 	];
-	
+
 	this.buttons = [];
-	
+
 	this.btnFunc = [
 		"pressBlue",
 		"pressGreen",
@@ -32,19 +32,19 @@ function NyanRace (pGameEngine) {
 		"pressViolet",
 		"pressYellow"
 	];
-	
+
   this.nyanCat;
 
 	this.nyanCatStars;
 	this.totalStars = 0;
-	
+
 	this.counterTitle;
 	this.timer;
 	this.moveNyanCat = false;
-	
+
 	this.counter = 3;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
-	
+
 	this.blueBtn;
 	this.greenBtn;
 	this.indigoBtn;
@@ -52,7 +52,7 @@ function NyanRace (pGameEngine) {
 	this.redBtn;
 	this.violetBtn;
 	this.yellowBtn;
-	
+
 }
 
 NyanRace.prototype.preload = function() {
@@ -75,14 +75,14 @@ NyanRace.prototype.create = function() {
 	//randomly select nyan cat color game
 	var randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
 	console.log(randomColor);
-	
+
 	this.nyanCat = this.gameEngine.add.sprite(-50, this.gameEngine.world.centerY - 100, randomColor);
 	this.nyanCat.color = randomColor;
   this.nyanCat.anchor.setTo(0.5, 0.5);
 	this.nyanCat.scale.setTo(0.5, 0.5);
-	
+
 	var xLoc = 100;
-	
+
 	for(var i = 0; i < 7; i++){
 		console.log(this.colors[i]);
 		this.buttons[i] = this.gameEngine.add.sprite(xLoc, 450, this.colors[i]);
@@ -94,19 +94,19 @@ NyanRace.prototype.create = function() {
 		xLoc += 115;
 		console.log(this.buttons[i]);
 	}
-		
+
 	this.createTwinkles();
 	this.timer = this.gameEngine.time.create(false);
 	this.timer.loop(1000, countdown, this);
 	this.timer.start();
-	
+
 	this.gameEngine.physics.enable(this.nyanCat, Phaser.Physics.ARCADE);
 };
 
 function countdown() {
    this.counter--;
 	this.counterTitle.destroy();
-	
+
 	if(this.counter > 0){
 		this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, 		this.gameEngine.world.centerY, this.counter, this.counterStyle);
 	} else {
@@ -120,7 +120,7 @@ NyanRace.prototype.update = function() {
 	{
 			this.createTwinkles();
 	}
-	
+
 	if(this.moveNyanCat == true){
 		this.nyanCat.body.velocity.x = 2000;
 	}
@@ -131,19 +131,19 @@ NyanRace.prototype.update = function() {
 };
 
 NyanRace.prototype.createTwinkles = function(){
-	
+
 	this.nyanCatStars = this.gameEngine.add.sprite(this.gameEngine.world.randomX, this.gameEngine.world.randomY, 'nyanCatStars');
 	this.nyanCatStars.anchor.setTo(0.5);
 	this.nyanCatStars.animations.add('twinkle');
 	this.nyanCatStars.animations.play('twinkle', 6, false);
-	
+
 	//this.gameEngine.add.tween(this.gameEngine.nyanCatStars).to({ x: this.gameEngine.width + (1600 + this.nyanCatStars.x) }, 20000, Phaser.Easing.Linear.None, true);
 
 	this.totalStars++;
 };
 
 function pressBlue(){
-		if(this.nyanCat.color = "Blue"){
+		if(this.nyanCat.color == "Blue"){
 			this.outcome = 1;
 		} else {
 			this.outcome = -1;
@@ -151,7 +151,7 @@ function pressBlue(){
 }
 
 function pressGreen(){
-		if(this.nyanCat.color = "Green"){
+		if(this.nyanCat.color == "Green"){
 			this.outcome = 1;
 		} else {
 			this.outcome = -1;
@@ -159,7 +159,7 @@ function pressGreen(){
 }
 
 function pressIndigo(){
-		if(this.nyanCat.color = "Indigo"){
+		if(this.nyanCat.color == "Indigo"){
 			this.outcome = 1;
 		} else {
 			this.outcome = -1;
@@ -167,7 +167,7 @@ function pressIndigo(){
 }
 
 function pressRed(){
-		if(this.nyanCat.color = "Red"){
+		if(this.nyanCat.color == "Red"){
 			this.outcome = 1;
 		} else {
 			this.outcome = -1;
@@ -175,7 +175,7 @@ function pressRed(){
 }
 
 function pressOrange(){
-		if(this.nyanCat.color = "Orange"){
+		if(this.nyanCat.color == "Orange"){
 			this.outcome = 1;
 		} else {
 			this.outcome = -1;
@@ -183,7 +183,7 @@ function pressOrange(){
 }
 
 function pressViolet(){
-		if(this.nyanCat.color = "Violet"){
+		if(this.nyanCat.color == "Violet"){
 			this.outcome = 1;
 		} else {
 			this.outcome = -1;
@@ -191,7 +191,7 @@ function pressViolet(){
 }
 
 function pressYellow(){
-		if(this.nyanCat.color = "Yellow"){
+		if(this.nyanCat.color == "Yellow"){
 			this.outcome = 1;
 		} else {
 			this.outcome = -1;
@@ -216,5 +216,5 @@ NyanRace.prototype.destroy = function() {
 	}
 	this.totalStars = 0;
 	this.nyanCatStars.destroy();
-	
+
 }
