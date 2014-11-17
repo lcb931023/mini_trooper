@@ -34,7 +34,7 @@ function NyanRace (pGameEngine) {
 	];
 
   this.nyanCat;
-
+	this.nyanCatMusic;
 	this.nyanCatStars;
 	this.totalStars = 0;
 
@@ -42,7 +42,7 @@ function NyanRace (pGameEngine) {
 	this.timer;
 	this.moveNyanCat = false;
 
-	this.counter = 3;
+	this.counter = 5;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
 
 	this.blueBtn;
@@ -66,11 +66,13 @@ NyanRace.prototype.preload = function() {
 	this.gameEngine.load.image('Yellow', 'images/nyanCat_Yellow.png');
 
 	this.gameEngine.load.spritesheet('nyanCatStars', 'images/nyanStar.png', 100, 100, 6);
+	
+	this.gameEngine.load.audio('nyanCatMusic', ['audio/nyanCatMusic.mp3','audio/nyanCatMusic.ogg']);
 };
 
 NyanRace.prototype.create = function() {
 	this.gameEngine.stage.backgroundColor = '#0F4D8F';
-	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, 		this.gameEngine.world.centerY, this.counter, this.counterStyle);
+	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 
 	//randomly select nyan cat color game
 	var randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
@@ -93,6 +95,8 @@ NyanRace.prototype.create = function() {
 	}
 
 	this.createTwinkles();
+	this.nyanCatMusic = this.gameEngine.add.audio('nyanCatMusic');
+	this.nyanCatMusic.play();
 	this.timer = this.gameEngine.time.create(false);
 	this.timer.loop(1000, countdown, this);
 	this.timer.start();
@@ -105,7 +109,7 @@ function countdown() {
 	this.counterTitle.destroy();
 
 	if(this.counter > 0){
-		this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, 		this.gameEngine.world.centerY, this.counter, this.counterStyle);
+		this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 	} else {
 		this.moveNyanCat = true;
 	}
@@ -113,7 +117,7 @@ function countdown() {
 };
 
 NyanRace.prototype.update = function() {
-	if (this.totalStars < 200)
+	if (this.totalStars < 500)
 	{
 			this.createTwinkles();
 	}
@@ -133,8 +137,6 @@ NyanRace.prototype.createTwinkles = function(){
 	this.nyanCatStars.anchor.setTo(0.5);
 	this.nyanCatStars.animations.add('twinkle');
 	this.nyanCatStars.animations.play('twinkle', 6, false);
-
-	//this.gameEngine.add.tween(this.gameEngine.nyanCatStars).to({ x: this.gameEngine.width + (1600 + this.nyanCatStars.x) }, 20000, Phaser.Easing.Linear.None, true);
 
 	this.totalStars++;
 };
@@ -200,13 +202,14 @@ NyanRace.prototype.destroy = function() {
   this.score = 0;
   this.outcome = 0;
   // Detach listeners
-    // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
+  // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
   this.nyanCat.destroy();
   this.counterTitle.destroy();
+	this.nyanCatMusic.destroy();
   this.timer.destroy();
 	this.moveNyanCat = false;
-	this.counter = 3;
+	this.counter = 5;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
 	for (var i = 0; i < this.buttons.length; i++) {
 		this.buttons[i].destroy();
