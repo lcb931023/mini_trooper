@@ -46,14 +46,39 @@ window.onload = function() {
   }
 
   function create () {
-		startBg = gameEngine.add.sprite(0,0,'startBg');
-		startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
-		startBtn.anchor.set(0.5);
-		startBtn.inputEnabled = true;
-		startBtn.events.onInputDown.add(startFunction,this);
+		console.log("Desktop: " + gameEngine.device.desktop);
+		gameEngine.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+		if(gameEngine.device.desktop == true){
+			//If player is on desktop
+			startBg = gameEngine.add.sprite(0,0,'startBg');
+			startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
+			startBtn.anchor.set(0.5);
+			startBtn.inputEnabled = true;
+			startBtn.events.onInputDown.add(startFunction,this);
+		}
+		else{
+			startBg = gameEngine.add.sprite(0,0,'startBg');
+			startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
+			startBtn.anchor.set(0.5);
+			startBtn.inputEnabled = true;
+			startBtn.events.onInputDown.add(startFunctionFullScreen,this);
+		}
   }
 
 	function startFunction () {
+		//randomly select mini game
+		iCurGame = Math.floor(Math.random() * miniGames.length);
+
+		miniGames[iCurGame].create();
+    gameState = GS.GAMING;
+		startBtn.destroy();
+		startBg.destroy();
+	}
+
+	function startFunctionFullScreen () {
+		//Full screen
+		gameEngine.scale.startFullScreen();
+		
 		//randomly select mini game
 		iCurGame = Math.floor(Math.random() * miniGames.length);
 
