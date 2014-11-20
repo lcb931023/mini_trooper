@@ -10,9 +10,10 @@ window.onload = function() {
   // Minigame init
 
   var miniGames = [
-    new NoMeansNo(gameEngine),
-		new NyanRace(gameEngine),
-    //new MusicMembrane(gameEngine)
+    //new NoMeansNo(gameEngine),
+		//new NyanRace(gameEngine),
+    //new MusicMembrane(gameEngine),
+		new BulletHell(gameEngine)
   ];
 
   var winScreen = new WinScreen(gameEngine);
@@ -48,19 +49,15 @@ window.onload = function() {
   function create () {
 		console.log("Desktop: " + gameEngine.device.desktop);
 		gameEngine.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+		startBg = gameEngine.add.sprite(0,0,'startBg');
+		startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
+		startBtn.anchor.set(0.5);
+		startBtn.inputEnabled = true;
 		if(gameEngine.device.desktop == true){
 			//If player is on desktop
-			startBg = gameEngine.add.sprite(0,0,'startBg');
-			startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
-			startBtn.anchor.set(0.5);
-			startBtn.inputEnabled = true;
 			startBtn.events.onInputDown.add(startFunction,this);
 		}
 		else{
-			startBg = gameEngine.add.sprite(0,0,'startBg');
-			startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
-			startBtn.anchor.set(0.5);
-			startBtn.inputEnabled = true;
 			startBtn.events.onInputDown.add(startFunctionFullScreen,this);
 		}
   }
