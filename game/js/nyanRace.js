@@ -90,13 +90,13 @@ NyanRace.prototype.create = function() {
 	this.nyanCatMusic = this.gameEngine.add.audio('nyanCatMusic');
 	this.nyanCatMusic.play();
 	this.timer = this.gameEngine.time.create(false);
-	this.timer.loop(1000, countdown, this);
+	this.timer.loop(1000, this.countdown, this);
 	this.timer.start();
 
 	this.gameEngine.physics.enable(this.nyanCat, Phaser.Physics.ARCADE);
 };
 
-function countdown() {
+NyanRace.prototype.countdown = function() {
    this.counter--;
 	console.log(this.counter);
 	this.counterTitle.destroy();
@@ -135,6 +135,7 @@ NyanRace.prototype.createTwinkles = function(){
 };
 
 function pressBlue(){
+	console.log("Here");
 		if(this.nyanCat.color == "Blue"){
 			this.outcome = 1;
 		} else {
