@@ -45,14 +45,6 @@ function NyanRace (pGameEngine) {
 	this.counter = 5;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
 
-	this.blueBtn;
-	this.greenBtn;
-	this.indigoBtn;
-	this.orangeBtn;
-	this.redBtn;
-	this.violetBtn;
-	this.yellowBtn;
-
 }
 
 NyanRace.prototype.preload = function() {
