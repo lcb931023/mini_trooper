@@ -104,7 +104,7 @@ NyanRace.prototype.create = function() {
 	this.gameEngine.physics.enable(this.nyanCat, Phaser.Physics.ARCADE);
 };
 
-function countdown() {
+NyanRace.prototype.countdown = function() {
    this.counter--;
 	this.counterTitle.destroy();
 

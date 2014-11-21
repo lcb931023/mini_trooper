@@ -10,8 +10,12 @@ function BulletHell (pGameEngine) {
   this.outcome = 0;
   this.score = 0;
 	
+	this.gameTimerTitle;
+	this.gameTimer = 5;
+	this.gameTimerStyle = {font: "50px Arial", fill:"#000", align:"center" };
+	
 	this.counterTitle;
-	this.counter = 5;
+	this.counter = 3;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
 	
 	this.turrets = [];
@@ -41,6 +45,8 @@ BulletHell.prototype.create = function(){
 	this.gameEngine.physics.p2.restitution = 0.8;
 	this.gameEngine.stage.backgroundColor = '#FFFFFF';
 	
+	this.gameTimerTitle = this.gameEngine.add.text(900, 30, this.gameTimer, this.gameTimerStyle);
+	
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 	
 	this.dragObj = this.gameEngine.add.sprite(this.gameEngine.world.centerX, this.gameEngine.world.centerY, 'elbin');
@@ -56,7 +62,7 @@ BulletHell.prototype.create = function(){
 	for(var i=0; i < 3; i++){
 		this.turrets[i] = this.gameEngine.add.sprite(this.gameEngine.world.randomX, this.gameEngine.world.randomY, 'turret');
 		this.turrets[i].anchor.setTo(0.5);
-		//console.log(this.turrets[i]);
+		console.log(this.turrets[i]);
 	}
 	
 	//Create Bullets
@@ -72,7 +78,7 @@ BulletHell.prototype.create = function(){
 	this.gameEngine.physics.enable(this.dragObj, Phaser.Physics.ARCADE);
 };
 
-function countdown() {
+BulletHell.prototype.countdown = function() {
   this.counter--;
 	this.counterTitle.destroy();
 	
@@ -80,11 +86,19 @@ function countdown() {
 	{
 		this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 	}
-	else
+	else if(this.counter < 0)
 	{
-		
-	}
-	
+		this.gameTimer--;
+		this.gameTimerTitle.destroy();
+		if(this.gameTimer > 0)
+		{
+			this.gameTimerTitle = this.gameEngine.add.text(900, 30, this.gameTimer, this.gameTimerStyle);
+		} 
+		else
+		{
+			this.outcome = 1;
+		}
+	}	
 };
 
 BulletHell.prototype.update = function() {
@@ -99,14 +113,13 @@ BulletHell.prototype.update = function() {
 	if(this.counter <= 0){
 		for(var i=0; i < this.turrets.length; i++){
 			this.fire(this.turrets[i]);
-			console.log(this.turrets[i]);
 		}
 	}
 };
 
 BulletHell.prototype.onDragStart = function(sprite, pointer){
 	this.timer = this.gameEngine.time.create(false);
-	this.timer.loop(1000, countdown, this);
+	this.timer.loop(1000, this.countdown, this);
 	this.timer.start();	
 };
 
@@ -135,8 +148,10 @@ BulletHell.prototype.destroy = function(){
   this.outcome = 0;
 	this.dragObj.destroy();
 	this.counterTitle.destroy();
+	this.gameTimerTitle.destroy();
 	this.timer.destroy();
-	this.counter = 5;
+	this.counter = 3;
+	this.gameTimer = 5;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
 	for(var i=0; i < this.turrets.length; i++){
 		this.turrets[i].destroy();
