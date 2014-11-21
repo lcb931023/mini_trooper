@@ -8,7 +8,6 @@ function NoMeansNo (pGameEngine) {
   // [TODO] enum
   // 0 = ongoing, 1 = won, -1 = lost
   this.outcome = 0;
-
   this.score = 0;
 
   this.bg;
