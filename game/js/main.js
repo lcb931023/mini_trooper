@@ -12,8 +12,8 @@ window.onload = function() {
   var miniGames = [
     new NoMeansNo(gameEngine),
 		new NyanRace(gameEngine),
-    //new MusicMembrane(gameEngine)
-		new BulletHell(gameEngine)
+    new MusicMembrane(gameEngine),
+		new BulletHell(gameEngine),
   ];
 
   var winScreen = new WinScreen(gameEngine);
@@ -75,7 +75,7 @@ window.onload = function() {
 	function startFunctionFullScreen () {
 		//Full screen
 		gameEngine.scale.startFullScreen();
-		
+
 		//randomly select mini game
 		iCurGame = Math.floor(Math.random() * miniGames.length);
 
