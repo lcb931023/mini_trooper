@@ -9,6 +9,8 @@ function BulletHell (pGameEngine) {
   // 0 = ongoing, 1 = won, -1 = lost
   this.outcome = 0;
   this.score = 0;
+	
+	this.bulletHellMusic;
 
 	this.gameTimerTitle;
 	this.gameTimer = 5;
@@ -36,6 +38,8 @@ BulletHell.prototype.preload = function() {
 	this.gameEngine.load.image('bullet', 'images/bullet.png');
 
 	this.startShooting = false;
+	
+	this.gameEngine.load.audio('guileTheme', ['audio/guile.mp3']);
 };
 
 BulletHell.prototype.create = function(){
@@ -44,6 +48,9 @@ BulletHell.prototype.create = function(){
 	this.gameEngine.physics.p2.gravity.y = 100;
 	this.gameEngine.physics.p2.restitution = 0.8;
 	this.gameEngine.stage.backgroundColor = '#FFFFFF';
+	
+	this.bulletHellMusic = this.gameEngine.add.audio('guileTheme');
+	this.bulletHellMusic.play();
 
 	this.gameTimerTitle = this.gameEngine.add.text(900, 30, this.gameTimer, this.gameTimerStyle);
 
@@ -129,6 +136,7 @@ BulletHell.prototype.destroy = function(){
 	// Reset vars
   this.score = 0;
   this.outcome = 0;
+	this.bulletHellMusic.destroy();
 	this.dragObj.destroy();
 	this.counterTitle.destroy();
 	this.gameTimerTitle.destroy();
