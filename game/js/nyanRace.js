@@ -98,6 +98,7 @@ NyanRace.prototype.create = function() {
 
 NyanRace.prototype.countdown = function() {
    this.counter--;
+	console.log(this.counter);
 	this.counterTitle.destroy();
 
 	if(this.counter > 0){
