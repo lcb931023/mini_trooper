@@ -31,7 +31,7 @@ function BulletHell (pGameEngine) {
 
 BulletHell.prototype.preload = function() {
 	//load images
-  this.gameEngine.load.image('elbin', 'images/elbin.png');
+  this.gameEngine.load.image('elbin', 'images/jj.png');
 	this.gameEngine.load.image('turret', 'images/normTurret.png');
 	this.gameEngine.load.image('bullet', 'images/bullet.png');
 

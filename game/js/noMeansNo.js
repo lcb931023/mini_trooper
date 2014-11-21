@@ -77,8 +77,6 @@ NoMeansNo.prototype.update = function() {
     this.outcome = 1;
 	}
 	
-	console.log(this.elbin.body.velocity.x);
-	
 	if(this.elbin.body.velocity.x > 0){ 
 		this.elbin.body.velocity.x -= 1;
 	}
@@ -87,7 +85,7 @@ NoMeansNo.prototype.update = function() {
 
 //button action functions
 NoMeansNo.prototype.actionOnClick = function(){
-	this.elbin.body.velocity.x += 15;
+	this.elbin.body.velocity.x += 12;
 };
 
 NoMeansNo.prototype.destroy = function() {
