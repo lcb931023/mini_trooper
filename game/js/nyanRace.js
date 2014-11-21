@@ -135,7 +135,6 @@ NyanRace.prototype.createTwinkles = function(){
 };
 
 function pressBlue(){
-	console.log("Here");
 		if(this.nyanCat.color == "Blue"){
 			this.outcome = 1;
 		} else {
