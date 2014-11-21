@@ -45,14 +45,6 @@ function NyanRace (pGameEngine) {
 	this.counter = 5;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
 
-	this.blueBtn;
-	this.greenBtn;
-	this.indigoBtn;
-	this.orangeBtn;
-	this.redBtn;
-	this.violetBtn;
-	this.yellowBtn;
-
 }
 
 NyanRace.prototype.preload = function() {
@@ -98,13 +90,13 @@ NyanRace.prototype.create = function() {
 	this.nyanCatMusic = this.gameEngine.add.audio('nyanCatMusic');
 	this.nyanCatMusic.play();
 	this.timer = this.gameEngine.time.create(false);
-	this.timer.loop(1000, countdown, this);
+	this.timer.loop(1000, this.countdown, this);
 	this.timer.start();
 
 	this.gameEngine.physics.enable(this.nyanCat, Phaser.Physics.ARCADE);
 };
 
-function countdown() {
+NyanRace.prototype.countdown = function() {
    this.counter--;
 	this.counterTitle.destroy();
 

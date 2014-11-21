@@ -8,7 +8,6 @@ function NoMeansNo (pGameEngine) {
   // [TODO] enum
   // 0 = ongoing, 1 = won, -1 = lost
   this.outcome = 0;
-
   this.score = 0;
 
   this.bg;
@@ -35,7 +34,7 @@ NoMeansNo.prototype.create = function() {
 	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 
 	//button actions event handlers
-	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', actionOnClick, this, 1, 0);
+	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', this.actionOnClick, this, 1, 0);
 
   this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY + 65, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
@@ -57,8 +56,8 @@ NoMeansNo.prototype.create = function() {
 	this.gameEngine.physics.enable(this.house, Phaser.Physics.ARCADE);
 
 	//CONSTANT
-	this.elbin.body.velocity.x = 50;
-	this.pedobear.body.velocity.x = 75;
+	this.elbin.body.velocity.x = 100;
+	this.pedobear.body.velocity.x = 50;
 };
 
 NoMeansNo.prototype.update = function() {
@@ -77,13 +76,17 @@ NoMeansNo.prototype.update = function() {
 	function liveElbin (elbin, house) {
     this.outcome = 1;
 	}
+	
+	if(this.elbin.body.velocity.x > 0){ 
+		this.elbin.body.velocity.x -= 1;
+	}
 
 };
 
 //button action functions
-function actionOnClick(){
-	this.elbin.body.velocity.x += 10;
-}
+NoMeansNo.prototype.actionOnClick = function(){
+	this.elbin.body.velocity.x += 12;
+};
 
 NoMeansNo.prototype.destroy = function() {
   // Reset vars
@@ -97,4 +100,4 @@ NoMeansNo.prototype.destroy = function() {
   this.pedobear.destroy();
   this.house.destroy();
   this.runBtn.destroy();
-}
+};
