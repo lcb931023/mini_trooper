@@ -24,6 +24,7 @@ function MusicMembrane (pGameEngine) {
 	];
 	
 	this.randomInstrument;
+	this.randomSound;
 	
 	this.buttons = [];
 	
@@ -49,17 +50,24 @@ function MusicMembrane (pGameEngine) {
 MusicMembrane.prototype.preload = function() {
   
 	//Load all instrument images
-	this.gameEngine.load.image('Guitar', 'images/nyanCat_Blue.png');
-	this.gameEngine.load.image('Ukulele', 'images/nyanCat_Green.png');
-	this.gameEngine.load.image('Banjo', 'images/nyanCat_Indigo.png');
-	this.gameEngine.load.image('Drums', 'images/nyanCat_Orange.png');
-	this.gameEngine.load.image('Piano', 'images/nyanCat_Red.png');
-	this.gameEngine.load.image('Violin', 'images/nyanCat_Violet.png');
-	this.gameEngine.load.image('Trumpet', 'images/nyanCat_Yellow.png');
-	this.gameEngine.load.image('Saxophone', 'images/nyanCat_Yellow.png');
+	this.gameEngine.load.image('Guitar', 'images/guitar.png');
+	this.gameEngine.load.image('Ukulele', 'images/uke.png');
+	this.gameEngine.load.image('Banjo', 'images/banjo.png');
+	this.gameEngine.load.image('Drums', 'images/drums.png');
+	this.gameEngine.load.image('Piano', 'images/piano.png');
+	this.gameEngine.load.image('Violin', 'images/violin.png');
+	this.gameEngine.load.image('Trumpet', 'images/trumpet.png');
+	this.gameEngine.load.image('Saxophone', 'images/sax.png');
 	
 	//Load all instrument sounds
-	//this.gameEngine.load.audio('guitar', ['audio/nyanCatMusic.mp3','audio/nyanCatMusic.ogg']);
+	this.gameEngine.load.audio('Guitar', ['audio/guitar.mp3','audio/guitar.ogg']);
+	this.gameEngine.load.audio('Banjo', ['audio/banjo.mp3','audio/banjo.ogg']);
+	this.gameEngine.load.audio('Drums', ['audio/drums.mp3','audio/drums.ogg']);
+	this.gameEngine.load.audio('Piano', ['audio/piano.mp3','audio/piano.ogg']);
+	this.gameEngine.load.audio('Saxophone', ['audio/saxophone.mp3','audio/saxophone.ogg']);
+	this.gameEngine.load.audio('Trumpet', ['audio/trumpet.mp3','audio/trumpet.ogg']);
+	this.gameEngine.load.audio('Ukulele', ['audio/ukulele.mp3','audio/ukulele.ogg']);
+	this.gameEngine.load.audio('Violin', ['audio/violin.mp3','audio/violin.ogg']);
 };
 
 MusicMembrane.prototype.create = function() {
@@ -79,21 +87,20 @@ MusicMembrane.prototype.create = function() {
 		this.buttons[i].inputEnabled = true;
 		this.buttons[i].events.onInputDown.add(eval(this.btnFunc[i]), this);
 		this.buttons[i].anchor.setTo(0.5, 0.5);
-		this.buttons[i].scale.setTo(0.3, 0.3);
+		this.buttons[i].scale.setTo(1.5, 1.5);
 		xLoc += 115;
 	}
 	
 	this.timer = this.gameEngine.time.create(false);
-	this.timer.loop(1000, countdown, this);
+	this.timer.loop(1000, mmCountdown, this);
 	this.timer.start();
 
 
 };
 
-function countdown() {
+function mmCountdown() {
   
 	this.counter--;
-
 	this.counterTitle.destroy();
 
 	if(this.counter > 0){
@@ -103,10 +110,10 @@ function countdown() {
 		this.outcome = -1;
 	}
 	
-	if(this.counter == 2){
+	if(this.counter == 3){
 		//When counter reaches 2, play sound
-		//this.randomSound = this.gameEngine.add.audio(this.randomInstrument);
-		//this.randomSound.play();
+		this.randomSound = this.gameEngine.add.audio(this.randomInstrument);
+		this.randomSound.play();
 	}
 
 };
@@ -189,13 +196,12 @@ MusicMembrane.prototype.destroy = function() {
   // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
   this.counterTitle.destroy();
-	//this.randomSound.destroy();
+	this.randomSound.destroy();
   this.timer.destroy();
 	this.counter = 5;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
 	for (var i = 0; i < this.buttons.length; i++) {
 		this.buttons[i].destroy();
 	}
-
 
 }
