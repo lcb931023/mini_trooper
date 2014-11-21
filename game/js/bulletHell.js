@@ -33,7 +33,7 @@ function BulletHell (pGameEngine) {
 
 BulletHell.prototype.preload = function() {
 	//load images
-  this.gameEngine.load.image('elbin', 'images/jj.png');
+  this.gameEngine.load.image('jj', 'images/jj.png');
 	this.gameEngine.load.image('turret', 'images/normTurret.png');
 	this.gameEngine.load.image('bullet', 'images/bullet.png');
 
@@ -56,7 +56,9 @@ BulletHell.prototype.create = function(){
 
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 
-	this.dragObj = this.gameEngine.add.sprite(this.gameEngine.world.centerX, this.gameEngine.world.centerY, 'elbin');
+	this.dragObj = this.gameEngine.add.sprite(this.gameEngine.world.centerX, this.gameEngine.world.centerY, 'jj');
+	this.dragObj.anchor.setTo(0.5);
+	this.dragObj.scale.setTo(0.7);
 	this.dragObj.inputEnabled = true;
 	//Allow dragging
 	this.dragObj.input.enableDrag(true);

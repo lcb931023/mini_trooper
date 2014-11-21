@@ -10,9 +10,9 @@ window.onload = function() {
   // Minigame init
 
   var miniGames = [
-    //new NoMeansNo(gameEngine),
-		//new NyanRace(gameEngine),
-    //new MusicMembrane(gameEngine),
+    new NoMeansNo(gameEngine),
+		new NyanRace(gameEngine),
+    new MusicMembrane(gameEngine),
 		new BulletHell(gameEngine)
   ];
 
