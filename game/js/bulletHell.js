@@ -21,7 +21,7 @@ function BulletHell (pGameEngine) {
 	this.turrets = [];
 	
 	this.bullets;
-	this.fireRate = 400;
+	this.fireRate = 1;
 	this.nextFire = 0;
 	
 	this.startShooting;
@@ -112,6 +112,7 @@ BulletHell.prototype.update = function() {
 	
 	if(this.counter <= 0){
 		for(var i=0; i < this.turrets.length; i++){
+			console.log("Firing turret " + i);
 			this.fire(this.turrets[i]);
 		}
 	}
@@ -131,14 +132,16 @@ BulletHell.prototype.fire = function(turret){
 			if (this.gameEngine.time.now > this.nextFire && this.bullets.countDead() > 0)
 			{
 					this.nextFire = this.gameEngine.time.now + this.fireRate;
-
+					console.log("this.gameEngine.time.now > this.nextFire");
 					this.bullet = this.bullets.getFirstDead();
 
 					this.bullet.reset(turret.x, turret.y);
 
 					this.gameEngine.physics.arcade.moveToPointer(this.bullet, 300);
 				
-			}	
+			}	else {
+				console.log("FALSE MOTHERFUCKER");
+			}
 };
 
 
