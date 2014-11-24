@@ -35,8 +35,11 @@ window.onload = function() {
 	//Keeps track of what mini game is randomly selected
 	var iCurGame;
 
-  //preload all minigames + start screen button
+  // setup screen, preload all minigames + start screen button
 	function preload () {
+    gameEngine.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    gameEngine.scale.setScreenSize();
+
 		gameEngine.load.image('startBg', 'images/startPg_bg.png');
     gameEngine.load.image('startBtn', 'images/startBtn.png');
     for (var i=0; i< miniGames.length; i++) {
@@ -47,19 +50,14 @@ window.onload = function() {
   }
 
   function create () {
+    gameEngine.scale.refresh();
+
 		console.log("Desktop: " + gameEngine.device.desktop);
-		gameEngine.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 		startBg = gameEngine.add.sprite(0,0,'startBg');
 		startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
 		startBtn.anchor.set(0.5);
 		startBtn.inputEnabled = true;
-		if(gameEngine.device.desktop == true){
-			//If player is on desktop
-			startBtn.events.onInputDown.add(startFunction,this);
-		}
-		else{
-			startBtn.events.onInputDown.add(startFunctionFullScreen,this);
-		}
+    startBtn.events.onInputDown.add(startFunction,this);
   }
 
 	function startFunction () {
