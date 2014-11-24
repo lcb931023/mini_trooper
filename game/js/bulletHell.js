@@ -21,8 +21,6 @@ function BulletHell (pGameEngine) {
 	this.turrets = [];
 
 	this.bullets;
-	this.fireRate = 400;
-	this.nextFire = 0;
 
 	this.startShooting;
 
