@@ -9,7 +9,7 @@ function BulletHell (pGameEngine) {
   // 0 = ongoing, 1 = won, -1 = lost
   this.outcome = 0;
   this.score = 0;
-	
+
 	this.bulletHellMusic;
 
 	this.gameTimerTitle;
@@ -27,6 +27,12 @@ function BulletHell (pGameEngine) {
 	this.startShooting;
 
 	this.dragObj;
+	
+	this.gameStarted = false;
+	
+	this.instructions;
+	this.instructionsTxt = "Select JJ and hold on, dodge the bullets gangsta!";
+	this.instructionsStyle = {font: "30px Arial", fill:"#000", align:"center" };
 }
 
 BulletHell.prototype.preload = function() {
@@ -36,17 +42,29 @@ BulletHell.prototype.preload = function() {
 	this.gameEngine.load.image('bullet', 'images/bullet.png');
 
 	this.startShooting = false;
-	
+
 	this.gameEngine.load.audio('guileTheme', ['audio/guile.mp3']);
 };
 
 BulletHell.prototype.create = function(){
+	
+	this.gameEngine.stage.backgroundColor = '#FFF';
+	this.instructions = this.gameEngine.add.text(200, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	
+	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
+};
+
+BulletHell.prototype.gameStart = function(){
+	
+		//get rid of instructions
+	this.instructions.destroy();
+	
 	this.gameEngine.physics.startSystem(Phaser.Physics.ARCADE);
 	this.gameEngine.physics.startSystem(Phaser.Physics.P2JS);
 	this.gameEngine.physics.p2.gravity.y = 100;
 	this.gameEngine.physics.p2.restitution = 0.8;
 	this.gameEngine.stage.backgroundColor = '#FFFFFF';
-	
+
 	this.bulletHellMusic = this.gameEngine.add.audio('guileTheme');
 	this.bulletHellMusic.play();
 
@@ -65,8 +83,8 @@ BulletHell.prototype.create = function(){
 	this.dragObj.events.onDragStop.add(this.onDragStop, this);
 
 	//Make Turret Group
-
-	for(var i=0; i < 3; i++){
+  var turretAmt = DIFFICULTY.get("bh", "turretAmt");
+	for(var i=0; i < turretAmt; i++){
 		this.turrets[i] = new Turret(this.gameEngine);
 	}
 
@@ -81,7 +99,10 @@ BulletHell.prototype.create = function(){
 
 	this.gameEngine.physics.enable(this.bullets, Phaser.Physics.ARCADE);
 	this.gameEngine.physics.enable(this.dragObj, Phaser.Physics.ARCADE);
-};
+	
+	this.gameStarted = true;
+	
+}
 
 BulletHell.prototype.countdown = function() {
   this.counter--;
@@ -108,7 +129,10 @@ BulletHell.prototype.countdown = function() {
 
 BulletHell.prototype.update = function() {
 	//Player gets hit by bullet
-	this.gameEngine.physics.arcade.overlap(this.bullets, this.dragObj, killPlayer, null, this);
+	
+	if(this.gameStarted == true){
+		this.gameEngine.physics.arcade.overlap(this.bullets, this.dragObj, killPlayer, null, this);
+	}
 
 	function killPlayer(player, bullet){
 		this.dragObj.kill();
@@ -148,4 +172,5 @@ BulletHell.prototype.destroy = function(){
 		this.turrets[i].destroy();
 	}
 	this.bullets.destroy();
+	this.gameStarted = false;
 }
