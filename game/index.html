@@ -12,9 +12,21 @@ By: Changbai, JJ, Mike, Elbin
 	<style>
     body { background-color: #000000; color:#FFF; margin:0;}
     canvas { background-color: #222222; }
+		
+		@font-face {
+  		font-family: "ChickenButt";
+  		src: url('fonts/ChickenButt.ttf') format("truetype");
+		}
+		
+		.fontPreload{
+    position:absolute;
+    left:-100px;
+		}
+		
   </style>
   </head>
   <body>
+		<div class="fontPreload" style="font-family: ChickenButt;">.</div>
     <script src="js/difficulty.js"></script>
     <script src="js/turret.js"></script>
     <script src="js/minigame.js"></script>
@@ -22,6 +34,7 @@ By: Changbai, JJ, Mike, Elbin
 		<script src="js/musicMembrane.js"></script>
 		<script src="js/bulletHell.js"></script>
 		<script src="js/nyanRace.js"></script>
+		<script src="js/superTrooper.js"></script>
     <script src="js/screen.js"></script>
     <script src="js/winScreen.js"></script>
     <script src="js/lostScreen.js"></script>

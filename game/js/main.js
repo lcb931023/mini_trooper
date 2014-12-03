@@ -13,7 +13,8 @@ window.onload = function() {
     new NoMeansNo(gameEngine),
 		new NyanRace(gameEngine),
     new MusicMembrane(gameEngine),
-		new BulletHell(gameEngine)
+		new BulletHell(gameEngine),
+		new SuperTrooper(gameEngine)
   ];
 
   var winScreen = new WinScreen(gameEngine);
@@ -106,12 +107,14 @@ window.onload = function() {
   }
 
   function gameWon() {
+    miniGames[iCurGame].addDif();
     destroyCurrentGame();
     winScreen.create();
     gameState = GS.WON;
   }
 
   function gameLost() {
+    miniGames[iCurGame].resetDif();
     destroyCurrentGame();
     lostScreen.create();
     gameState = GS.LOST;
@@ -124,9 +127,9 @@ window.onload = function() {
   function gotoNextGame() {
     var iNewGame = Math.floor(Math.random() * miniGames.length);
     // Avoid same game
-    // if (miniGames.length > 1)
-    //   while (iNewGame == iCurGame)
-    //     { iNewGame = Math.floor(Math.random() * miniGames.length); }
+    if (miniGames.length > 1)
+      while (iNewGame == iCurGame)
+        { iNewGame = Math.floor(Math.random() * miniGames.length); }
     iCurGame = iNewGame;
 
     miniGames[iCurGame].create();

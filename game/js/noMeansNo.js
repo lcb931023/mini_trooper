@@ -5,6 +5,7 @@ NoMeansNo.prototype.constructor = NoMeansNo;
 
 function NoMeansNo (pGameEngine) {
   this.gameEngine = pGameEngine;
+  this.gameId = "nmn";
   // [TODO] enum
   // 0 = ongoing, 1 = won, -1 = lost
   this.outcome = 0;
@@ -17,6 +18,12 @@ function NoMeansNo (pGameEngine) {
 	this.house;
 	//button
 	this.runBtn;
+	this.gameStarted = false;
+
+	this.instructions;
+	this.instructionsTxt = "Run away from the bear before he rapes Elbin!";
+	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
+
 }
 
 NoMeansNo.prototype.preload = function() {
@@ -30,6 +37,17 @@ NoMeansNo.prototype.preload = function() {
 };
 
 NoMeansNo.prototype.create = function() {
+
+	this.gameEngine.stage.backgroundColor = '#FFF';
+	this.instructions = this.gameEngine.add.text(200, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+
+	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
+};
+
+NoMeansNo.prototype.gameStart = function() {
+
+	//get rid of instructions
+	this.instructions.destroy();
 
 	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 
@@ -58,13 +76,22 @@ NoMeansNo.prototype.create = function() {
 	//CONSTANT
 	this.elbin.body.velocity.x = 100;
 	this.pedobear.body.velocity.x = 50;
-};
+
+	//now add physics overlaps in update function, as well as testing elbins body being violated
+	this.gameStarted = true;
+
+}
 
 NoMeansNo.prototype.update = function() {
+
+	if(this.gameStarted == true){
+
 	//Pedobear hits player
 	this.gameEngine.physics.arcade.overlap(this.elbin, this.pedobear, killElbin, null, this);
 	//Player hits house
 	this.gameEngine.physics.arcade.overlap(this.elbin, this.house, liveElbin, null, this);
+
+	}
 
 	function killElbin (elbin, pedobear) {
 		this.pedobear.body.velocity.x = 0;
@@ -76,9 +103,13 @@ NoMeansNo.prototype.update = function() {
 	function liveElbin (elbin, house) {
     this.outcome = 1;
 	}
-	
-	if(this.elbin.body.velocity.x > 0){ 
+
+	if(this.gameStarted == true){
+
+	if(this.elbin.body.velocity.x > 0){
 		this.elbin.body.velocity.x -= 1;
+	}
+
 	}
 
 };
@@ -100,4 +131,5 @@ NoMeansNo.prototype.destroy = function() {
   this.pedobear.destroy();
   this.house.destroy();
   this.runBtn.destroy();
+	this.gameStarted = false;
 };
