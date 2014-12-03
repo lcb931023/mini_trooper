@@ -5,6 +5,7 @@ NyanRace.prototype.constructor = NyanRace;
 
 function NyanRace (pGameEngine) {
   this.gameEngine = pGameEngine;
+  this.gameId = "nr";
   // [TODO] enum
   // 0 = ongoing, 1 = won, -1 = lost
   this.outcome = 0;
@@ -63,24 +64,24 @@ NyanRace.prototype.preload = function() {
 	this.gameEngine.load.image('Yellow', 'images/nyanCat_Yellow.png');
 
 	this.gameEngine.load.spritesheet('nyanCatStars', 'images/nyanStar.png', 100, 100, 6);
-	
+
 	this.gameEngine.load.audio('nyanCatMusic', ['audio/nyanCatMusic.mp3','audio/nyanCatMusic.ogg']);
 };
 
 NyanRace.prototype.create = function() {
-	
+
 	this.gameEngine.stage.backgroundColor = '#FFF';
 	this.instructions = this.gameEngine.add.text(200, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
-	
+
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
-	
+
 };
 
 NyanRace.prototype.gameStart = function() {
-	
+
 	//get rid of instructions
 	this.instructions.destroy();
-	
+
 	this.gameEngine.stage.backgroundColor = '#0F4D8F';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 
@@ -112,9 +113,9 @@ NyanRace.prototype.gameStart = function() {
 	this.timer.start();
 
 	this.gameEngine.physics.enable(this.nyanCat, Phaser.Physics.ARCADE);
-	
+
 	this.gameStarted = true;
-	
+
 }
 
 
@@ -131,14 +132,14 @@ NyanRace.prototype.countdown = function() {
 };
 
 NyanRace.prototype.update = function() {
-	
+
 	if(this.gameStarted == true){
-		
+
 	if (this.totalStars < 500)
 	{
 			this.createTwinkles();
 	}
-		
+
 	}
 
 	if(this.moveNyanCat == true){
@@ -146,14 +147,14 @@ NyanRace.prototype.update = function() {
 	}
 
 	if(this.gameStarted == true){
-	
+
 	if(this.nyanCat.x > 1000){
 		this.outcome = -1;
 	}
-		
+
 	}
-	
-	
+
+
 };
 
 NyanRace.prototype.createTwinkles = function(){

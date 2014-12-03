@@ -107,14 +107,14 @@ window.onload = function() {
   }
 
   function gameWon() {
-    DIFFICULTY.current ++;
+    miniGames[iCurGame].addDif();
     destroyCurrentGame();
     winScreen.create();
     gameState = GS.WON;
   }
 
   function gameLost() {
-    DIFFICULTY.current = 0;
+    miniGames[iCurGame].resetDif();
     destroyCurrentGame();
     lostScreen.create();
     gameState = GS.LOST;
