@@ -12,9 +12,21 @@ By: Changbai, JJ, Mike, Elbin
 	<style>
     body { background-color: #000000; color:#FFF; margin:0;}
     canvas { background-color: #222222; }
+		
+		@font-face {
+  		font-family: "StoryBook";
+  		src: url('fonts/StoryBook.ttf') format("truetype");
+		}
+		
+		.fontPreload{
+    position:absolute;
+    left:-100px;
+		}
+		
   </style>
   </head>
   <body>
+		<div class="fontPreload" style="font-family: StoryBook;">.</div>
     <script src="js/difficulty.js"></script>
     <script src="js/turret.js"></script>
     <script src="js/minigame.js"></script>
