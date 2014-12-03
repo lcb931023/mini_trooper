@@ -10,6 +10,7 @@ function SuperTrooper (pGameEngine) {
   this.outcome = 0;
   this.score = 0;
   this.scoreText;
+	this.gameId = "st";
 
 	this.colors = [
 		"Blue",
@@ -24,13 +25,13 @@ function SuperTrooper (pGameEngine) {
 	this.buttons = [];
 
 	this.btnFunc = [
-		"pressBlue",
-		"pressGreen",
-		"pressIndigo",
-		"pressOrange",
-		"pressRed",
-		"pressViolet",
-		"pressYellow"
+		"pressBlue2",
+		"pressGreen2",
+		"pressIndigo2",
+		"pressOrange2",
+		"pressRed2",
+		"pressViolet2",
+		"pressYellow2"
 	];
 
   this.nyanCat;
@@ -153,7 +154,7 @@ SuperTrooper.prototype.update = function() {
 	
 };
 
-function pressBlue(){
+function pressBlue2(){
 		
 		if(this.randomGame == 0 && this.randomColor1 == "Blue"){
 			this.outcome = 1;
@@ -164,7 +165,7 @@ function pressBlue(){
 		}
 }
 
-function pressGreen(){
+function pressGreen2(){
 				if(this.randomGame == 0 && this.randomColor1 == "Green"){
 			this.outcome = 1;
 		} else if(this.randomGame == 1 && this.randomColor2 == "Green"){
@@ -174,7 +175,7 @@ function pressGreen(){
 		}
 }
 
-function pressIndigo(){
+function pressIndigo2(){
 			if(this.randomGame == 0 && this.randomColor1 == "Indigo"){
 			this.outcome = 1;
 		} else if(this.randomGame == 1 && this.randomColor2 == "Indigo"){
@@ -184,7 +185,7 @@ function pressIndigo(){
 		}
 }
 
-function pressRed(){
+function pressRed2(){
 				if(this.randomGame == 0 && this.randomColor1 == "Red"){
 			this.outcome = 1;
 		} else if(this.randomGame == 1 && this.randomColor2 == "Red"){
@@ -194,7 +195,7 @@ function pressRed(){
 		}
 }
 
-function pressOrange(){
+function pressOrange2(){
 			if(this.randomGame == 0 && this.randomColor1 == "Orange"){
 			this.outcome = 1;
 		} else if(this.randomGame == 1 && this.randomColor2 == "Orange"){
@@ -204,7 +205,7 @@ function pressOrange(){
 		}
 }
 
-function pressViolet(){
+function pressViolet2(){
 				if(this.randomGame == 0 && this.randomColor1 == "Violet"){
 			this.outcome = 1;
 		} else if(this.randomGame == 1 && this.randomColor2 == "Violet"){
@@ -214,7 +215,7 @@ function pressViolet(){
 		}
 }
 
-function pressYellow(){
+function pressYellow2(){
 				if(this.randomGame == 0 && this.randomColor1 == "Yellow"){
 			this.outcome = 1;
 		} else if(this.randomGame == 1 && this.randomColor2 == "Yellow"){
