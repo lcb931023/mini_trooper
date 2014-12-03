@@ -44,7 +44,7 @@ function MusicMembrane (pGameEngine) {
 	this.timer;
 
 	this.counter = 5;
-	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
 
 	this.instructions;
 	this.instructionsTxt = "Wait for the sound, then pick the right instrument!";
