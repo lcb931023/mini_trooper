@@ -48,7 +48,7 @@ function MusicMembrane (pGameEngine) {
 
 	this.instructions;
 	this.instructionsTxt = "Wait for the sound, then pick the right instrument!";
-	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
+	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"left" };
 
 }
 
@@ -80,7 +80,7 @@ MusicMembrane.prototype.preload = function() {
 MusicMembrane.prototype.create = function() {
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text(200, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 372), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
 
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 

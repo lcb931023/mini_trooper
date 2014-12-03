@@ -51,8 +51,9 @@ BulletHell.prototype.preload = function() {
 BulletHell.prototype.create = function(){
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text(200, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
-
+	
+	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 367), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 };
 
