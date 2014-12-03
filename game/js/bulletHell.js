@@ -15,11 +15,12 @@ function BulletHell (pGameEngine) {
 
 	this.gameTimerTitle;
 	this.gameTimer = 5;
-	this.gameTimerStyle = {font: "50px ChickenButt", fill:"#000", align:"center" };
+
+	this.gameTimerStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
 
 	this.counterTitle;
 	this.counter = 3;
-	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
 
 	this.turrets = [];
 
@@ -41,7 +42,7 @@ BulletHell.prototype.preload = function() {
   this.gameEngine.load.image('jj', 'images/jj.png');
 	this.gameEngine.load.image('turret', 'images/normTurret.png');
 	this.gameEngine.load.image('bullet', 'images/bullet.png');
-
+	this.gameEngine.load.image('background', 'images/bulletHellBG.png');
 	this.startShooting = false;
 
 	this.gameEngine.load.audio('guileTheme', ['audio/guile.mp3']);
@@ -59,6 +60,8 @@ BulletHell.prototype.gameStart = function(){
 
 		//get rid of instructions
 	this.instructions.destroy();
+
+	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 
 	this.gameEngine.physics.startSystem(Phaser.Physics.ARCADE);
 	this.gameEngine.physics.startSystem(Phaser.Physics.P2JS);
@@ -161,6 +164,7 @@ BulletHell.prototype.destroy = function(){
 	// Reset vars
   this.score = 0;
   this.outcome = 0;
+	this.bg.destroy();
 	this.bulletHellMusic.destroy();
 	this.dragObj.destroy();
 	this.counterTitle.destroy();
@@ -168,7 +172,7 @@ BulletHell.prototype.destroy = function(){
 	this.timer.destroy();
 	this.counter = 3;
 	this.gameTimer = 5;
-	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
 	for(var i=0; i < this.turrets.length; i++){
 		this.turrets[i].destroy();
 	}
