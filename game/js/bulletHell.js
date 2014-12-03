@@ -41,7 +41,7 @@ BulletHell.prototype.preload = function() {
   this.gameEngine.load.image('jj', 'images/jj.png');
 	this.gameEngine.load.image('turret', 'images/normTurret.png');
 	this.gameEngine.load.image('bullet', 'images/bullet.png');
-	this.gameEngine.load.image('background', 'images/bulletHellBG.png');
+	this.gameEngine.load.image('background1', 'images/bulletHellBG.png');
 	this.startShooting = false;
 
 	this.gameEngine.load.audio('guileTheme', ['audio/guile.mp3']);
@@ -60,7 +60,7 @@ BulletHell.prototype.gameStart = function(){
 		//get rid of instructions
 	this.instructions.destroy();
 	
-	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
+	this.bg = this.gameEngine.add.sprite(0, 0, 'background1');
 	
 	this.gameEngine.physics.startSystem(Phaser.Physics.ARCADE);
 	this.gameEngine.physics.startSystem(Phaser.Physics.P2JS);

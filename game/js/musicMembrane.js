@@ -53,7 +53,7 @@ function MusicMembrane (pGameEngine) {
 
 MusicMembrane.prototype.preload = function() {
 	//Load game background
-	this.gameEngine.load.image('background', 'images/musicMembraneBG.png');
+	this.gameEngine.load.image('background2', 'images/musicMembraneBG.png');
   
 	//Load all instrument images
 	this.gameEngine.load.image('Guitar', 'images/guitar.png');
@@ -90,7 +90,7 @@ MusicMembrane.prototype.gameStart = function() {
 	//get rid of instructions
 	this.instructions.destroy();
 	
-	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
+	this.bg = this.gameEngine.add.sprite(0, 0, 'background2');
 	
 	this.gameEngine.stage.backgroundColor = '#FFA200';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
