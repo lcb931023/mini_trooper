@@ -22,7 +22,7 @@ function NoMeansNo (pGameEngine) {
 
 	this.instructions;
 	this.instructionsTxt = "Run away from the bear before he rapes Elbin!";
-	this.instructionsStyle = {font: "30px StoryBook", fill:"#000", align:"center" };
+	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 
 }
 
