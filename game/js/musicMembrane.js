@@ -44,7 +44,7 @@ function MusicMembrane (pGameEngine) {
 	this.timer;
 	
 	this.counter = 5;
-	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px StoryBook", fill:"#fff", align:"center" };
 	
 	this.instructions;
 	this.instructionsTxt = "Wait for the sound, then pick the right instrument!";
@@ -53,6 +53,8 @@ function MusicMembrane (pGameEngine) {
 }
 
 MusicMembrane.prototype.preload = function() {
+	//Load game background
+	this.gameEngine.load.image('background', 'images/musicMembraneBG.png');
   
 	//Load all instrument images
 	this.gameEngine.load.image('Guitar', 'images/guitar.png');
@@ -88,6 +90,8 @@ MusicMembrane.prototype.gameStart = function() {
 	
 	//get rid of instructions
 	this.instructions.destroy();
+	
+	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 	
 	this.gameEngine.stage.backgroundColor = '#FFA200';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
@@ -212,14 +216,14 @@ MusicMembrane.prototype.destroy = function() {
   // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
   this.counterTitle.destroy();
-	
+	this.bg.destroy();
 	if(this.premature == false){
 	this.randomSound.destroy();
 	}
 	
   this.timer.destroy();
 	this.counter = 5;
-	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px StoryBook", fill:"#fff", align:"center" };
 	for (var i = 0; i < this.buttons.length; i++) {
 		this.buttons[i].destroy();
 	}
