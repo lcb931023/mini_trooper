@@ -13,7 +13,8 @@ window.onload = function() {
     new NoMeansNo(gameEngine),
 		new NyanRace(gameEngine),
     new MusicMembrane(gameEngine),
-		new BulletHell(gameEngine)
+		new BulletHell(gameEngine),
+		new SuperTrooper(gameEngine)
   ];
 
   var winScreen = new WinScreen(gameEngine);
