@@ -11,6 +11,7 @@ function MusicMembrane (pGameEngine) {
   this.outcome = 0;
 	this.score = 0;
   this.scoreText;
+	this.premature = true;
 	
 	this.instruments = [
 		"Guitar",
@@ -113,6 +114,7 @@ function mmCountdown() {
 	if(this.counter == 3){
 		//When counter reaches 2, play sound
 		this.randomSound = this.gameEngine.add.audio(this.randomInstrument);
+		this.premature = false;
 		this.randomSound.play();
 	}
 
@@ -196,7 +198,11 @@ MusicMembrane.prototype.destroy = function() {
   // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
   this.counterTitle.destroy();
+	
+	if(this.premature == false){
 	this.randomSound.destroy();
+	}
+	
   this.timer.destroy();
 	this.counter = 5;
 	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
