@@ -77,8 +77,8 @@ SuperTrooper.prototype.preload = function() {
 SuperTrooper.prototype.create = function() {
 	
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text(200, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
-	
+	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 200), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 	
 };
@@ -89,7 +89,7 @@ SuperTrooper.prototype.gameStart = function() {
 	this.instructions.destroy();
 	
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY - 200, this.counter, this.counterStyle);
+	this.counterTitle = this.gameEngine.add.text(900, 30, this.counter, this.counterStyle);
 
 	//randomly select colors for game
 	this.randomColor1 = this.colors[Math.floor(Math.random() * this.colors.length)];
@@ -106,15 +106,15 @@ SuperTrooper.prototype.gameStart = function() {
 		this.randomGameTxt = "What color is it?";
 	}
 	
- this.randomGameTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY - 100, this.randomGameTxt, this.randomGameStyle);
-	
+ this.randomGameTitle = this.gameEngine.add.text((this.gameEngine.world.centerX - 132), this.gameEngine.world.centerY - 100, this.randomGameTxt, this.randomGameStyle);
+
 	//Prevent same colors
 	while(this.randomColor1 == this.randomColor2){
 		this.randomColor2 = this.colors[Math.floor(Math.random() * this.colors.length)];
 	}
 	
 	this.wordStyle = {font: "45px ChickenButt", fill: this.randomColor1.toLowerCase(), align:"center" };
-	this.word = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.randomColor2, this.wordStyle);
+	this.word = this.gameEngine.add.text((this.gameEngine.world.centerX - 85), this.gameEngine.world.centerY, this.randomColor2, this.wordStyle);
 
 	var xLoc = 100;
 
@@ -142,7 +142,7 @@ SuperTrooper.prototype.countdown = function() {
 	this.counterTitle.destroy();
 
 	if(this.counter > 0){
-		this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY - 200, this.counter, this.counterStyle);
+		this.counterTitle = this.gameEngine.add.text(900, 30, this.counter, this.counterStyle);
 	} else {
 		this.outcome = -1;
 	}
