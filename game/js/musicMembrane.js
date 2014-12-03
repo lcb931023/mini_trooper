@@ -44,11 +44,11 @@ function MusicMembrane (pGameEngine) {
 	this.timer;
 	
 	this.counter = 5;
-	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
 	
 	this.instructions;
 	this.instructionsTxt = "Wait for the sound, then pick the right instrument!";
-	this.instructionsStyle = {font: "30px Arial", fill:"#000", align:"center" };
+	this.instructionsStyle = {font: "30px StoryBook", fill:"#000", align:"center" };
 
 }
 
@@ -219,7 +219,7 @@ MusicMembrane.prototype.destroy = function() {
 	
   this.timer.destroy();
 	this.counter = 5;
-	this.counterStyle = {font: "70px Arial", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
 	for (var i = 0; i < this.buttons.length; i++) {
 		this.buttons[i].destroy();
 	}

@@ -1,9 +1,14 @@
 "use strict";
 
 var DIFFICULTY = {
-	current : 0
+		get: function(gameName, varName) {
+			// Get difficulty;
+			// if already highest, return highest
+			return this[gameName][varName][this.current] ? this[gameName][varName][this.current] : this[gameName][varName][ this[gameName][varName].length-1 ];
+		}
 	,	bh: {
-		turretAmt: [
+			current : 0
+		,	turretAmt: [
       1,
       2,
       3,
@@ -32,10 +37,6 @@ var DIFFICULTY = {
 
     ]
   }
-	,	get: function(gameName, varName) {
-		// Get difficulty;
-		// if already highest, return highest
-		return this[gameName][varName][this.current] ? this[gameName][varName][this.current] : this[gameName][varName][ this[gameName][varName].length-1 ];
-	}
+
 
 };
