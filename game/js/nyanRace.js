@@ -44,11 +44,11 @@ function NyanRace (pGameEngine) {
 	this.gameStarted = false;
 
 	this.counter = 5;
-	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
 	
 	this.instructions;
 	this.instructionsTxt = "Wait for nyan Cat and then choose the right color!";
-	this.instructionsStyle = {font: "30px StoryBook", fill:"#000", align:"center" };
+	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 
 }
 
@@ -235,7 +235,7 @@ NyanRace.prototype.destroy = function() {
   this.timer.destroy();
 	this.moveNyanCat = false;
 	this.counter = 5;
-	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
 	for (var i = 0; i < this.buttons.length; i++) {
 		this.buttons[i].destroy();
 	}

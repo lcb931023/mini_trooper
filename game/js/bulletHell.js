@@ -14,11 +14,11 @@ function BulletHell (pGameEngine) {
 
 	this.gameTimerTitle;
 	this.gameTimer = 5;
-	this.gameTimerStyle = {font: "50px StoryBook", fill:"#000", align:"center" };
+	this.gameTimerStyle = {font: "50px ChickenButt", fill:"#000", align:"center" };
 
 	this.counterTitle;
 	this.counter = 3;
-	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
 
 	this.turrets = [];
 
@@ -32,7 +32,7 @@ function BulletHell (pGameEngine) {
 	
 	this.instructions;
 	this.instructionsTxt = "Select JJ and hold on, dodge the bullets gangsta!";
-	this.instructionsStyle = {font: "30px StoryBook", fill:"#000", align:"center" };
+	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 }
 
 BulletHell.prototype.preload = function() {
@@ -167,7 +167,7 @@ BulletHell.prototype.destroy = function(){
 	this.timer.destroy();
 	this.counter = 3;
 	this.gameTimer = 5;
-	this.counterStyle = {font: "70px StoryBook", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
 	for(var i=0; i < this.turrets.length; i++){
 		this.turrets[i].destroy();
 	}
