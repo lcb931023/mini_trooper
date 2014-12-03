@@ -4,7 +4,7 @@ function Turret (gameEngine) {
   Phaser.Sprite.call(this, gameEngine, gameEngine.world.randomX, gameEngine.world.randomY, 'turret');
   this.anchor.setTo(0.5, 0.5);
   this.nextFire = 0;
-  this.fireRate = 400;
+  this.fireRate = DIFFICULTY.get("bh", "fireRate");
   gameEngine.add.existing(this);
 };
 
