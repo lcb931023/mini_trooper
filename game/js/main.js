@@ -11,10 +11,11 @@ window.onload = function() {
 
   var miniGames = [
    // new NoMeansNo(gameEngine),
-		new NyanRace(gameEngine),
+		// new NyanRace(gameEngine),
   // new MusicMembrane(gameEngine),
 	//	new BulletHell(gameEngine),
 	//	new SuperTrooper(gameEngine)
+	  	new WheresWatson(gameEngine)
   ];
 
   var winScreen = new WinScreen(gameEngine);
