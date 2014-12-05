@@ -45,12 +45,14 @@ function NyanRace (pGameEngine) {
 	this.gameStarted = false;
 
 	this.counter = 5;
-	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
+	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
 	
 	this.instructions;
 	this.instructionsTxt = "Wait for nyan Cat and then choose the right color!";
-	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
-
+	this.instructionsStyle = {font: "30px ChickenButt", fill:"#fff", align:"center" };
+	
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
 }
 
 NyanRace.prototype.preload = function() {
@@ -85,6 +87,9 @@ NyanRace.prototype.gameStart = function() {
 
 	this.gameEngine.stage.backgroundColor = '#0F4D8F';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
+	
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.nr.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
 
 	//randomly select nyan cat color game
 	var randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
@@ -234,6 +239,7 @@ NyanRace.prototype.destroy = function() {
   this.nyanCat.destroy();
   this.counterTitle.destroy();
 	this.nyanCatMusic.destroy();
+	this.difficulty.destroy();
   this.timer.destroy();
 	this.moveNyanCat = false;
 	this.counter = 5;

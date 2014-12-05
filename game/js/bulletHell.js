@@ -35,6 +35,9 @@ function BulletHell (pGameEngine) {
 	this.instructions;
 	this.instructionsTxt = "Select JJ and hold on, dodge the bullets gangsta!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
+	
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
 }
 
 BulletHell.prototype.preload = function() {
@@ -72,12 +75,15 @@ BulletHell.prototype.gameStart = function(){
 	this.gameEngine.stage.backgroundColor = '#FFFFFF';
 
 	this.bulletHellMusic = this.gameEngine.add.audio('guileTheme');
-	this.bulletHellMusic.play();
+	this.bulletHellMusic.play('',0,1,true);
 
 	this.gameTimerTitle = this.gameEngine.add.text(900, 30, this.gameTimer, this.gameTimerStyle);
 
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
-
+	
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.bh.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
+	
 	this.dragObj = this.gameEngine.add.sprite(this.gameEngine.world.centerX, this.gameEngine.world.centerY, 'jj');
 	this.dragObj.anchor.setTo(0.5);
 	this.dragObj.scale.setTo(0.7);
@@ -167,6 +173,7 @@ BulletHell.prototype.destroy = function(){
   this.score = 0;
   this.outcome = 0;
 	this.bg.destroy();
+	this.difficulty.destroy();
 	this.bulletHellMusic.destroy();
 	this.dragObj.destroy();
 	this.counterTitle.destroy();

@@ -49,7 +49,9 @@ function MusicMembrane (pGameEngine) {
 	this.instructions;
 	this.instructionsTxt = "Wait for the sound, then pick the right instrument!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"left" };
-
+	
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
 }
 
 MusicMembrane.prototype.preload = function() {
@@ -96,6 +98,9 @@ MusicMembrane.prototype.gameStart = function() {
 	
 	this.gameEngine.stage.backgroundColor = '#FFA200';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
+	
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.mm.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
 
 	//randomly select instrument sound
 	this.randomInstrument = this.instruments[Math.floor(Math.random() * this.instruments.length)];
@@ -213,6 +218,7 @@ MusicMembrane.prototype.destroy = function() {
   // Reset vars
   this.score = 0;
   this.outcome = 0;
+	this.difficulty.destroy();
   // Detach listeners
   // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
