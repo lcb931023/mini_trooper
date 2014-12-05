@@ -149,7 +149,7 @@ NyanRace.prototype.update = function() {
 	}
 
 	if(this.moveNyanCat == true){
-		this.nyanCat.body.velocity.x = 1000;
+		this.nyanCat.body.velocity.x = DIFFICULTY.get(this.gameId, "catSpeed");
 	}
 
 	if(this.gameStarted == true){

@@ -41,6 +41,22 @@ var DIFFICULTY = {
 	// nyan race
 	,	nr: {
 		current : 0
+		, catSpeed: [
+			500,
+			750,
+			1000,
+			1150,
+			1250,
+			1350,
+			1500,
+			1750,
+			2000,
+			2000,
+			2000,
+			2000,
+			2000,
+			2000,
+		]
 	}
 	// music membrane
 	,	mm: {
