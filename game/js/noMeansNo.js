@@ -59,7 +59,6 @@ NoMeansNo.prototype.gameStart = function() {
 	
 	//button actions event handlers
 	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', this.actionOnClick, this, 1, 0, 1, 0);
-	this.runBtn.onInputUp.add(this.up, this);
 
   this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY + 65, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
@@ -124,10 +123,6 @@ NoMeansNo.prototype.update = function() {
 //button action functions
 NoMeansNo.prototype.actionOnClick = function(){
 	this.elbin.body.velocity.x += 12;
-};
-
-NoMeansNo.prototype.up = function(){
-	console.log("Up");
 };
 
 NoMeansNo.prototype.destroy = function() {
