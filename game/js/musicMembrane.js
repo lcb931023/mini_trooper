@@ -80,7 +80,8 @@ MusicMembrane.prototype.preload = function() {
 MusicMembrane.prototype.create = function() {
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 372), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions.x = this.gameEngine.world.centerX - this.instructions.width/2;
 
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 

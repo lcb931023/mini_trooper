@@ -39,8 +39,9 @@ NoMeansNo.prototype.preload = function() {
 NoMeansNo.prototype.create = function() {
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 348), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
-	console.log(this.instructions.width);
+	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions.x = this.gameEngine.world.centerX - this.instructions.width/2;
+	
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 };
 
