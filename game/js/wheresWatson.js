@@ -49,9 +49,9 @@ WheresWatson.prototype.preload = function() {
 	this.gameEngine.load.image('Changbai', 'images/changbai.png');
 	this.gameEngine.load.image('Elbin', 'images/elbin.png');
 	this.gameEngine.load.image('Mike', 'images/mike.png');
-	this.gameEngine.load.image('background1', 'images/watsonBG1.png');
-	this.gameEngine.load.image('background2', 'images/watsonBG2.png');
-	this.gameEngine.load.image('background3', 'images/watsonBG3.png');
+	this.gameEngine.load.image('watsonBG1', 'images/watsonBG1.png');
+	this.gameEngine.load.image('watsonBG2', 'images/watsonBG2.png');
+	this.gameEngine.load.image('watsonBG3', 'images/watsonBG3.png');
 };
 
 WheresWatson.prototype.create = function() {
@@ -71,7 +71,7 @@ WheresWatson.prototype.gameStart = function() {
 	
 	var randomBackground = parseInt(Math.random() * 3) + 1;
 
-	this.bg = this.gameEngine.add.sprite(0, 0, 'background' + randomBackground);
+	this.bg = this.gameEngine.add.sprite(0, 0, 'watsonBG' + randomBackground);
 	
 	this.randomX = parseInt(Math.random() * 960);
 	this.randomY = parseInt(Math.random() * 560);
