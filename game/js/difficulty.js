@@ -59,7 +59,10 @@ var DIFFICULTY = {
 	,	mm: {
 		current : 0
 		, playDur: [
-			3,
+			4.2,
+			3.8,
+			3.4,
+			3.0,
 			2.6,
 			2.2,
 			2.0,
