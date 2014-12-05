@@ -73,16 +73,16 @@ WheresWatson.prototype.gameStart = function() {
 
 	this.bg = this.gameEngine.add.sprite(0, 0, 'watsonBG' + randomBackground);
 	
-	this.randomX = parseInt(Math.random() * 960);
-	this.randomY = parseInt(Math.random() * 560);
+	this.randomX = parseInt(50 + (Math.random() * 860));
+	this.randomY = parseInt(50 + (Math.random() * 460));
 	
 	this.numFaces = DIFFICULTY.get(this.gameId, "numFaces");
 	this.faceSize = DIFFICULTY.get(this.gameId, "faceSize");
 	
 	for(var i = 0; i < this.numFaces; i++){
 		
-		this.randomX = parseInt(Math.random() * 960);
-	  this.randomY = parseInt(Math.random() * 560);
+		this.randomX = parseInt(50 + (Math.random() * 860));
+	  this.randomY = parseInt(50 + (Math.random() * 460));
 		var rand = parseInt(Math.random() * this.nonWhites.length);
 		this.people[i] = this.gameEngine.add.sprite(this.randomX, this.randomY, this.nonWhites[rand]);
 		this.people[i].anchor.setTo(0.5, 0.5);
