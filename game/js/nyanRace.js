@@ -57,13 +57,13 @@ function NyanRace (pGameEngine) {
 
 NyanRace.prototype.preload = function() {
   //load images
-	this.gameEngine.load.image('Blue', 'images/nyanCat_Blue.png');
-	this.gameEngine.load.image('Green', 'images/nyanCat_Green.png');
-	this.gameEngine.load.image('Indigo', 'images/nyanCat_Indigo.png');
-	this.gameEngine.load.image('Orange', 'images/nyanCat_Orange.png');
-	this.gameEngine.load.image('Red', 'images/nyanCat_Red.png');
-	this.gameEngine.load.image('Violet', 'images/nyanCat_Violet.png');
-	this.gameEngine.load.image('Yellow', 'images/nyanCat_Yellow.png');
+	this.gameEngine.load.image('nyanCat_Blue', 'images/nyanCat_Blue.png');
+	this.gameEngine.load.image('nyanCat_Green', 'images/nyanCat_Green.png');
+	this.gameEngine.load.image('nyanCat_Indigo', 'images/nyanCat_Indigo.png');
+	this.gameEngine.load.image('nyanCat_Orange', 'images/nyanCat_Orange.png');
+	this.gameEngine.load.image('nyanCat_Red', 'images/nyanCat_Red.png');
+	this.gameEngine.load.image('nyanCat_Violet', 'images/nyanCat_Violet.png');
+	this.gameEngine.load.image('nyanCat_Yellow', 'images/nyanCat_Yellow.png');
 
 	this.gameEngine.load.spritesheet('nyanCatStars', 'images/nyanStar.png', 100, 100, 6);
 
@@ -94,7 +94,7 @@ NyanRace.prototype.gameStart = function() {
 	//randomly select nyan cat color game
 	var randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
 
-	this.nyanCat = this.gameEngine.add.sprite(-50, this.gameEngine.world.centerY - 100, randomColor);
+	this.nyanCat = this.gameEngine.add.sprite(-50, this.gameEngine.world.centerY - 100, "nyanCat_"+randomColor);
 	this.nyanCat.color = randomColor;
   this.nyanCat.anchor.setTo(0.5, 0.5);
 	this.nyanCat.scale.setTo(0.5, 0.5);
@@ -102,7 +102,7 @@ NyanRace.prototype.gameStart = function() {
 	var xLoc = 100;
 
 	for(var i = 0; i < 7; i++){
-		this.buttons[i] = this.gameEngine.add.sprite(xLoc, 450, this.colors[i]);
+		this.buttons[i] = this.gameEngine.add.sprite(xLoc, 450, "nyanCat_"+this.colors[i]);
 		this.buttons[i].anchor.set(0.5);
 		this.buttons[i].inputEnabled = true;
 		this.buttons[i].events.onInputDown.add(eval(this.btnFunc[i]),this);
