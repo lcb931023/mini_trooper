@@ -46,11 +46,11 @@ function NyanRace (pGameEngine) {
 
 	this.counter = 5;
 	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
-	
+
 	this.instructions;
 	this.instructionsTxt = "Wait for nyan Cat and then choose the right color!";
-	this.instructionsStyle = {font: "30px ChickenButt", fill:"#fff", align:"center" };
-	
+	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
+
 	this.difficulty;
 	this.difficultyStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
 }
@@ -75,7 +75,7 @@ NyanRace.prototype.create = function() {
 	this.gameEngine.stage.backgroundColor = '#FFF';
 	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
 	this.instructions.x = this.gameEngine.world.centerX - this.instructions.width/2;
-	
+
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 
 };
@@ -87,7 +87,7 @@ NyanRace.prototype.gameStart = function() {
 
 	this.gameEngine.stage.backgroundColor = '#0F4D8F';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
-	
+
 	this.difficultyTxt = "Difficulty: " + DIFFICULTY.nr.current;
 	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
 
