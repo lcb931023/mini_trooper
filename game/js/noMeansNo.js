@@ -21,7 +21,7 @@ function NoMeansNo (pGameEngine) {
 	this.gameStarted = false;
 
 	this.instructions;
-	this.instructionsTxt = "Run away from the bear before he rapes Elbin!";
+	this.instructionsTxt = "Run away from the bear before he catches Elbin!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 	
 	this.difficulty;
