@@ -11,7 +11,7 @@ window.onload = function() {
 
   var miniGames = [
 	  new WheresWatson(gameEngine),
-		new RedButton(gameEngine)
+		new RedButton(gameEngine),
     new NoMeansNo(gameEngine),
 		new NyanRace(gameEngine),
     new MusicMembrane(gameEngine),

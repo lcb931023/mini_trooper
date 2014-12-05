@@ -90,7 +90,10 @@ var DIFFICULTY = {
 	,	st: {
 		current : 0
 		, prompt: [
-			
+			["What color is the word written in?",	"What color does the word say?"],
+			["What color is it in?",	"What color is it?"],
+			["COLOR OF THE COLOR",	"COLOR OF THE WORD"],
+			["Select the matching color of the font!!!!!", "Select the matching color of the word!!!!!"]
 		]
 	}
 	// where's watson
