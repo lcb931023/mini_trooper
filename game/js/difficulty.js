@@ -42,6 +42,17 @@ var DIFFICULTY = {
 	// music membrane
 	,	mm: {
 		current : 0
+		, playDur: [
+			3,
+			2.6,
+			2.2,
+			2.0,
+			1.8,
+			1.7,
+			1.6,
+			1.5,
+			1.4
+		]
 	}
 	// no means no
 	,	nmn: {
