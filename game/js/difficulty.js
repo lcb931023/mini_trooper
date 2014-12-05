@@ -49,6 +49,15 @@ var DIFFICULTY = {
 	// no means no
 	,	nmn: {
 		current : 0
+		, pedoSpeed: [
+			1,
+			1.5,
+			2.0,
+			2.3,
+			2.6,
+			2.9,
+			3.3,
+		]
 	}
 	// strooper trooper
 	,	st: {
