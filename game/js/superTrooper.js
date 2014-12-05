@@ -47,6 +47,9 @@ function SuperTrooper (pGameEngine) {
 	this.instructionsTxt = "ITS SUPER TROOPER TIME!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 	
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#000", align:"center" };
+	
 	//our word for playing
 	this.word;
 	this.wordStyle;
@@ -91,7 +94,7 @@ SuperTrooper.prototype.gameStart = function() {
 	
 	this.gameEngine.stage.backgroundColor = '#FFF';
 	this.counterTitle = this.gameEngine.add.text(900, 30, this.counter, this.counterStyle);
-
+	
 	//randomly select colors for game
 	this.randomColor1 = this.colors[Math.floor(Math.random() * this.colors.length)];
 	this.randomColor2 = this.colors[Math.floor(Math.random() * this.colors.length)];
@@ -109,6 +112,10 @@ SuperTrooper.prototype.gameStart = function() {
 	
  this.randomGameTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY - 100, this.randomGameTxt, this.randomGameStyle);
 	this.randomGameTitle.x = this.gameEngine.world.centerX - this.randomGameTitle.width/2;
+	
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.st.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
+
 
 	//Prevent same colors
 	while(this.randomColor1 == this.randomColor2){
@@ -236,6 +243,7 @@ SuperTrooper.prototype.destroy = function() {
   // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
   this.counterTitle.destroy();
+	this.difficulty.destroy();
   this.timer.destroy();
 	this.counter = 5;
 	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };

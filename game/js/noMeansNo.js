@@ -23,7 +23,9 @@ function NoMeansNo (pGameEngine) {
 	this.instructions;
 	this.instructionsTxt = "Run away from the bear before he rapes Elbin!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
-
+	
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#000", align:"center" };
 }
 
 NoMeansNo.prototype.preload = function() {
@@ -52,6 +54,9 @@ NoMeansNo.prototype.gameStart = function() {
 
 	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.nmn.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
+	
 	//button actions event handlers
 	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', this.actionOnClick, this, 1, 0);
 
@@ -124,6 +129,7 @@ NoMeansNo.prototype.destroy = function() {
   // Reset vars
   this.score = 0;
   this.outcome = 0;
+	this.difficulty.destroy();
   // Detach listeners
     // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
