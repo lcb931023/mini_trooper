@@ -79,13 +79,6 @@ WheresWatson.prototype.gameStart = function() {
 	this.numFaces = DIFFICULTY.get(this.gameId, "numFaces");
 	this.faceSize = DIFFICULTY.get(this.gameId, "faceSize");
 	
-	this.watson = this.gameEngine.add.sprite(this.randomX, this.randomY, "JJ");
-	this.watson.anchor.set(0.5);
-	this.watson.inputEnabled = true;
-	this.watson.events.onInputDown.add(pressWatson,this);
-	this.watson.anchor.setTo(0.5, 0.5);
-	this.watson.scale.setTo(this.faceSize, this.faceSize);
-	
 	for(var i = 0; i < this.numFaces; i++){
 		
 		this.randomX = parseInt(Math.random() * 960);
@@ -96,6 +89,13 @@ WheresWatson.prototype.gameStart = function() {
 		this.people[i].scale.setTo(this.faceSize, this.faceSize);
 		
 	}
+	
+	this.watson = this.gameEngine.add.sprite(this.randomX, this.randomY, "JJ");
+	this.watson.anchor.set(0.5);
+	this.watson.inputEnabled = true;
+	this.watson.events.onInputDown.add(pressWatson,this);
+	this.watson.anchor.setTo(0.5, 0.5);
+	this.watson.scale.setTo(this.faceSize, this.faceSize);
 	
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 
