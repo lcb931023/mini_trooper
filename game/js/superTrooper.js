@@ -68,13 +68,13 @@ function SuperTrooper (pGameEngine) {
 
 SuperTrooper.prototype.preload = function() {
   //load images
-	this.gameEngine.load.image('Blue', 'images/nyanCat_Blue.png');
-	this.gameEngine.load.image('Green', 'images/nyanCat_Green.png');
-	this.gameEngine.load.image('Indigo', 'images/nyanCat_Indigo.png');
-	this.gameEngine.load.image('Orange', 'images/nyanCat_Orange.png');
-	this.gameEngine.load.image('Red', 'images/nyanCat_Red.png');
-	this.gameEngine.load.image('Violet', 'images/nyanCat_Violet.png');
-	this.gameEngine.load.image('Yellow', 'images/nyanCat_Yellow.png');
+	this.gameEngine.load.image('Blue', 'images/btn_Blue.png');
+	this.gameEngine.load.image('Green', 'images/btn_Green.png');
+	this.gameEngine.load.image('Indigo', 'images/btn_Indigo.png');
+	this.gameEngine.load.image('Orange', 'images/btn_Orange.png');
+	this.gameEngine.load.image('Red', 'images/btn_Red.png');
+	this.gameEngine.load.image('Violet', 'images/btn_Violet.png');
+	this.gameEngine.load.image('Yellow', 'images/btn_Yellow.png');
 };
 
 SuperTrooper.prototype.create = function() {
@@ -134,7 +134,7 @@ SuperTrooper.prototype.gameStart = function() {
 		this.buttons[i].inputEnabled = true;
 		this.buttons[i].events.onInputDown.add(eval(this.btnFunc[i]),this);
 		this.buttons[i].anchor.setTo(0.5, 0.5);
-		this.buttons[i].scale.setTo(0.3, 0.3);
+		this.buttons[i].scale.setTo(1.2, 1.2);
 		xLoc += 115;
 	}
 

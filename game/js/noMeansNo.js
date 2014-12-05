@@ -58,7 +58,7 @@ NoMeansNo.prototype.gameStart = function() {
 	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
 	
 	//button actions event handlers
-	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', this.actionOnClick, this, 1, 0);
+	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', this.actionOnClick, this, 1, 0, 1, 0);
 
   this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY + 65, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
@@ -81,7 +81,7 @@ NoMeansNo.prototype.gameStart = function() {
 
 	//CONSTANT
 	this.elbin.body.velocity.x = 100;
-	this.pedobear.body.velocity.x = 50;
+	this.pedobear.body.velocity.x = 50 * DIFFICULTY.get(this.gameId, "pedoSpeed");
 
 	//now add physics overlaps in update function, as well as testing elbins body being violated
 	this.gameStarted = true;

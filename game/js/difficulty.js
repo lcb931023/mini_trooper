@@ -38,6 +38,22 @@ var DIFFICULTY = {
 	// nyan race
 	,	nr: {
 		current : 0
+		, catSpeed: [
+			500,
+			750,
+			1000,
+			1150,
+			1250,
+			1350,
+			1500,
+			1750,
+			2000,
+			2000,
+			2000,
+			2000,
+			2000,
+			2000,
+		]
 	}
 	// music membrane
 	,	mm: {
@@ -57,6 +73,15 @@ var DIFFICULTY = {
 	// no means no
 	,	nmn: {
 		current : 0
+		, pedoSpeed: [
+			1,
+			1.5,
+			2.0,
+			2.3,
+			2.6,
+			2.9,
+			3.3,
+		]
 	}
 	// strooper trooper
 	,	st: {
