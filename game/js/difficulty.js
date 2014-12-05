@@ -89,6 +89,9 @@ var DIFFICULTY = {
 	// strooper trooper
 	,	st: {
 		current : 0
+		, prompt: [
+			
+		]
 	}
 	// where's watson
 	, ww: {
@@ -116,5 +119,7 @@ var DIFFICULTY = {
 			0.5,
 		]
 	}
-
+	, rb: {
+		current: 0
+	}
 };
