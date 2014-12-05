@@ -122,5 +122,7 @@ var DIFFICULTY = {
 			0.5,
 		]
 	}
-
+	, rb: {
+		current: 0
+	}
 };
