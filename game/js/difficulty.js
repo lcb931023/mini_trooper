@@ -8,7 +8,7 @@ var DIFFICULTY = {
 		}
 	// bullet hell
 	,	bh: {
-			current : 8
+			current : 0
 		,	turretAmt: [
       1,
       2,
