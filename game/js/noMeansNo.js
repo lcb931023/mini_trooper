@@ -23,7 +23,9 @@ function NoMeansNo (pGameEngine) {
 	this.instructions;
 	this.instructionsTxt = "Run away from the bear before he rapes Elbin!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
-
+	
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#000", align:"center" };
 }
 
 NoMeansNo.prototype.preload = function() {
@@ -39,8 +41,9 @@ NoMeansNo.prototype.preload = function() {
 NoMeansNo.prototype.create = function() {
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 348), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
-	console.log(this.instructions.width);
+	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions.x = this.gameEngine.world.centerX - this.instructions.width/2;
+	
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 };
 
@@ -51,8 +54,11 @@ NoMeansNo.prototype.gameStart = function() {
 
 	this.bg = this.gameEngine.add.sprite(0, 0, 'background');
 
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.nmn.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
+	
 	//button actions event handlers
-	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', this.actionOnClick, this, 1, 0);
+	this.runBtn = this.gameEngine.add.button(this.gameEngine.world.centerX - 315, 415, 'button', this.actionOnClick, this, 1, 0, 1, 0);
 
   this.elbin = this.gameEngine.add.sprite(150, this.gameEngine.world.centerY + 65, 'elbin');
   this.elbin.anchor.setTo(0.5, 0.5);
@@ -75,7 +81,7 @@ NoMeansNo.prototype.gameStart = function() {
 
 	//CONSTANT
 	this.elbin.body.velocity.x = 100;
-	this.pedobear.body.velocity.x = 50;
+	this.pedobear.body.velocity.x = 50 * DIFFICULTY.get(this.gameId, "pedoSpeed");
 
 	//now add physics overlaps in update function, as well as testing elbins body being violated
 	this.gameStarted = true;
@@ -123,6 +129,7 @@ NoMeansNo.prototype.destroy = function() {
   // Reset vars
   this.score = 0;
   this.outcome = 0;
+	this.difficulty.destroy();
   // Detach listeners
     // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements

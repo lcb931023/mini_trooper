@@ -45,23 +45,25 @@ function NyanRace (pGameEngine) {
 	this.gameStarted = false;
 
 	this.counter = 5;
-	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
-	
+	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
+
 	this.instructions;
 	this.instructionsTxt = "Wait for nyan Cat and then choose the right color!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
 }
 
 NyanRace.prototype.preload = function() {
   //load images
-	this.gameEngine.load.image('Blue', 'images/nyanCat_Blue.png');
-	this.gameEngine.load.image('Green', 'images/nyanCat_Green.png');
-	this.gameEngine.load.image('Indigo', 'images/nyanCat_Indigo.png');
-	this.gameEngine.load.image('Orange', 'images/nyanCat_Orange.png');
-	this.gameEngine.load.image('Red', 'images/nyanCat_Red.png');
-	this.gameEngine.load.image('Violet', 'images/nyanCat_Violet.png');
-	this.gameEngine.load.image('Yellow', 'images/nyanCat_Yellow.png');
+	this.gameEngine.load.image('nyanCat_Blue', 'images/nyanCat_Blue.png');
+	this.gameEngine.load.image('nyanCat_Green', 'images/nyanCat_Green.png');
+	this.gameEngine.load.image('nyanCat_Indigo', 'images/nyanCat_Indigo.png');
+	this.gameEngine.load.image('nyanCat_Orange', 'images/nyanCat_Orange.png');
+	this.gameEngine.load.image('nyanCat_Red', 'images/nyanCat_Red.png');
+	this.gameEngine.load.image('nyanCat_Violet', 'images/nyanCat_Violet.png');
+	this.gameEngine.load.image('nyanCat_Yellow', 'images/nyanCat_Yellow.png');
 
 	this.gameEngine.load.spritesheet('nyanCatStars', 'images/nyanStar.png', 100, 100, 6);
 
@@ -71,8 +73,9 @@ NyanRace.prototype.preload = function() {
 NyanRace.prototype.create = function() {
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 375), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
-	
+	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions.x = this.gameEngine.world.centerX - this.instructions.width/2;
+
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 
 };
@@ -85,10 +88,13 @@ NyanRace.prototype.gameStart = function() {
 	this.gameEngine.stage.backgroundColor = '#0F4D8F';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.nr.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
+
 	//randomly select nyan cat color game
 	var randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
 
-	this.nyanCat = this.gameEngine.add.sprite(-50, this.gameEngine.world.centerY - 100, randomColor);
+	this.nyanCat = this.gameEngine.add.sprite(-50, this.gameEngine.world.centerY - 100, "nyanCat_"+randomColor);
 	this.nyanCat.color = randomColor;
   this.nyanCat.anchor.setTo(0.5, 0.5);
 	this.nyanCat.scale.setTo(0.5, 0.5);
@@ -96,7 +102,7 @@ NyanRace.prototype.gameStart = function() {
 	var xLoc = 100;
 
 	for(var i = 0; i < 7; i++){
-		this.buttons[i] = this.gameEngine.add.sprite(xLoc, 450, this.colors[i]);
+		this.buttons[i] = this.gameEngine.add.sprite(xLoc, 450, "nyanCat_"+this.colors[i]);
 		this.buttons[i].anchor.set(0.5);
 		this.buttons[i].inputEnabled = true;
 		this.buttons[i].events.onInputDown.add(eval(this.btnFunc[i]),this);
@@ -143,7 +149,7 @@ NyanRace.prototype.update = function() {
 	}
 
 	if(this.moveNyanCat == true){
-		this.nyanCat.body.velocity.x = 1000;
+		this.nyanCat.body.velocity.x = DIFFICULTY.get(this.gameId, "catSpeed");
 	}
 
 	if(this.gameStarted == true){
@@ -233,6 +239,7 @@ NyanRace.prototype.destroy = function() {
   this.nyanCat.destroy();
   this.counterTitle.destroy();
 	this.nyanCatMusic.destroy();
+	this.difficulty.destroy();
   this.timer.destroy();
 	this.moveNyanCat = false;
 	this.counter = 5;

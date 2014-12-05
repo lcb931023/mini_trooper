@@ -42,6 +42,8 @@ function MusicMembrane (pGameEngine) {
 
 	this.counterTitle;
 	this.timer;
+  this.musicPlayTimer;
+  this.countdownStarted = false;
 
 	this.counter = 5;
 	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
@@ -50,12 +52,14 @@ function MusicMembrane (pGameEngine) {
 	this.instructionsTxt = "Wait for the sound, then pick the right instrument!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"left" };
 
+	this.difficulty;
+	this.difficultyStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
 }
 
 MusicMembrane.prototype.preload = function() {
 	//Load game background
 	this.gameEngine.load.image('background2', 'images/musicMembraneBG.png');
-  
+
 	//Load all instrument images
 	this.gameEngine.load.image('Guitar', 'images/guitar.png');
 	this.gameEngine.load.image('Ukulele', 'images/uke.png');
@@ -80,7 +84,8 @@ MusicMembrane.prototype.preload = function() {
 MusicMembrane.prototype.create = function() {
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
-	this.instructions = this.gameEngine.add.text((this.gameEngine.world.centerX - 372), this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
+	this.instructions.x = this.gameEngine.world.centerX - this.instructions.width/2;
 
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 
@@ -90,11 +95,14 @@ MusicMembrane.prototype.gameStart = function() {
 
 	//get rid of instructions
 	this.instructions.destroy();
-	
+
 	this.bg = this.gameEngine.add.sprite(0, 0, 'background2');
-	
+
 	this.gameEngine.stage.backgroundColor = '#FFA200';
 	this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
+
+	this.difficultyTxt = "Difficulty: " + DIFFICULTY.mm.current;
+	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
 
 	//randomly select instrument sound
 	this.randomInstrument = this.instruments[Math.floor(Math.random() * this.instruments.length)];
@@ -114,14 +122,15 @@ MusicMembrane.prototype.gameStart = function() {
 	this.timer = this.gameEngine.time.create(false);
 	this.timer.loop(1000, mmCountdown, this);
 	this.timer.start();
-
+  this.countdownStarted = true;
+  this.musicPlayTimer = this.gameEngine.time.totalElapsedSeconds();
+  console.log("Setting start time");
 }
 
 function mmCountdown() {
 
 	this.counter--;
 	this.counterTitle.destroy();
-
 	if(this.counter > 0){
 		this.counterTitle = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.counter, this.counterStyle);
 	} else {
@@ -129,18 +138,17 @@ function mmCountdown() {
 		this.outcome = -1;
 	}
 
-	if(this.counter == 3){
-		//When counter reaches 2, play sound
-		this.randomSound = this.gameEngine.add.audio(this.randomInstrument);
-		this.premature = false;
-		this.randomSound.play();
-	}
-
 };
 
-//NOT USED
 MusicMembrane.prototype.update = function() {
-
+  if (this.countdownStarted && this.premature) {
+    if( (this.gameEngine.time.totalElapsedSeconds() - this.musicPlayTimer) >= (5 - DIFFICULTY.get(this.gameId, "playDur")) ){
+      //When counter reaches desired time, play sound
+      this.randomSound = this.gameEngine.add.audio(this.randomInstrument);
+      this.premature = false;
+      this.randomSound.play();
+    }
+  }
 };
 
 function pressGuitar(){
@@ -212,6 +220,7 @@ MusicMembrane.prototype.destroy = function() {
   // Reset vars
   this.score = 0;
   this.outcome = 0;
+	this.difficulty.destroy();
   // Detach listeners
   // No listeners attached in this game, other than the button, which gets its listener destroyed with itself
   // Remove elements
@@ -229,5 +238,6 @@ MusicMembrane.prototype.destroy = function() {
 	}
 
 	this.premature = true;
+  this.countdownStarted = false;
 
 }
