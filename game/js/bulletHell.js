@@ -33,7 +33,7 @@ function BulletHell (pGameEngine) {
 	this.gameStarted = false;
 
 	this.instructions;
-	this.instructionsTxt = "Select JJ and hold on, dodge the bullets gangsta!";
+	this.instructionsTxt = "Select JJ and hold on, dodge the bullets!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 	
 	this.difficulty;
