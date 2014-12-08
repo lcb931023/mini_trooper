@@ -55,7 +55,6 @@ window.onload = function() {
   function create () {
     gameEngine.scale.refresh();
 
-		console.log("Desktop: " + gameEngine.device.desktop);
 		startBg = gameEngine.add.sprite(0,0,'startBg');
 		startBtn = gameEngine.add.sprite(gameEngine.world.centerX, 415, 'startBtn');
 		startBtn.anchor.set(0.5);

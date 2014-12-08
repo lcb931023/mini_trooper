@@ -53,7 +53,7 @@ function SuperTrooper (pGameEngine) {
 	this.counterStyle = {font: "70px ChickenButt", fill:"#000", align:"center" };
 
 	this.instructions;
-	this.instructionsTxt = "ITS SUPER TROOPER TIME!";
+	this.instructionsTxt = "IT'S SUPER TROOPER TIME!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 
 	this.difficulty;

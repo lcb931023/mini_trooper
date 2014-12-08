@@ -48,7 +48,7 @@ function NyanRace (pGameEngine) {
 	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
 
 	this.instructions;
-	this.instructionsTxt = "Wait for nyan Cat and then choose the right color!";
+	this.instructionsTxt = "Wait for Nyan Cat and then choose the right color!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
 
 	this.difficulty;

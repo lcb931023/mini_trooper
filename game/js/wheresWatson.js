@@ -57,7 +57,6 @@ WheresWatson.prototype.preload = function() {
 };
 
 WheresWatson.prototype.create = function() {
-
 	this.gameEngine.stage.backgroundColor = '#FFF';
 	
 	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
@@ -67,11 +66,9 @@ WheresWatson.prototype.create = function() {
 	this.preJJ.anchor.setTo(0.5);
 
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
-
 };
 
 WheresWatson.prototype.gameStart = function() {
-
 	//get rid of instructions
 	this.instructions.destroy();
 	this.preJJ.destroy();
@@ -87,14 +84,12 @@ WheresWatson.prototype.gameStart = function() {
 	this.faceSize = DIFFICULTY.get(this.gameId, "faceSize");
 	
 	for(var i = 0; i < this.numFaces; i++){
-		
 		this.randomX = parseInt(50 + (Math.random() * 860));
 	  this.randomY = parseInt(50 + (Math.random() * 460));
 		var rand = parseInt(Math.random() * this.others.length);
 		this.people[i] = this.gameEngine.add.sprite(this.randomX, this.randomY, this.others[rand]);
 		this.people[i].anchor.setTo(0.5, 0.5);
-		this.people[i].scale.setTo(this.faceSize, this.faceSize);
-		
+		this.people[i].scale.setTo(this.faceSize, this.faceSize);	
 	}
 	
 	this.watson = this.gameEngine.add.sprite(this.randomX, this.randomY, "JJ");
@@ -114,9 +109,7 @@ WheresWatson.prototype.gameStart = function() {
 	this.timer.start();
 
 	this.gameStarted = true;
-
 }
-
 
 WheresWatson.prototype.countdown = function() {
   this.counter--;
@@ -132,7 +125,6 @@ WheresWatson.prototype.countdown = function() {
 WheresWatson.prototype.update = function() {
 
 };
-
 
 function pressWatson(){
 	this.outcome = 1;
