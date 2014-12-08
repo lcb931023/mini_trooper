@@ -21,8 +21,10 @@ function WheresWatson (pGameEngine) {
 	this.counterStyle = {font: "70px ChickenButt", fill:"#fff", align:"center" };
 
 	this.instructions;
-	this.instructionsTxt = "Find JJ among the illegal aliens!";
+	this.instructionsTxt = "Find JJ among everyone else!";
 	this.instructionsStyle = {font: "30px ChickenButt", fill:"#000", align:"center" };
+	
+	this.preJJ;
 
 	this.difficulty;
 	this.difficultyStyle = {font: "50px ChickenButt", fill:"#fff", align:"center" };
@@ -30,7 +32,7 @@ function WheresWatson (pGameEngine) {
 	this.watson;
 	this.people = [];
 	
-	this.nonWhites = [
+	this.others = [
 		"Changbai",
 		"Elbin",
 		"Mike"
@@ -57,8 +59,12 @@ WheresWatson.prototype.preload = function() {
 WheresWatson.prototype.create = function() {
 
 	this.gameEngine.stage.backgroundColor = '#FFF';
+	
 	this.instructions = this.gameEngine.add.text(this.gameEngine.world.centerX, this.gameEngine.world.centerY, this.instructionsTxt, this.instructionsStyle);
 	this.instructions.x = this.gameEngine.world.centerX - this.instructions.width/2;
+	
+	this.preJJ = this.gameEngine.add.sprite(this.gameEngine.world.centerX, this.gameEngine.world.centerY - 100, 'JJ');
+	this.preJJ.anchor.setTo(0.5);
 
 	this.gameEngine.time.events.add(Phaser.Timer.SECOND * 3, this.gameStart, this);
 
@@ -68,6 +74,7 @@ WheresWatson.prototype.gameStart = function() {
 
 	//get rid of instructions
 	this.instructions.destroy();
+	this.preJJ.destroy();
 	
 	var randomBackground = parseInt(Math.random() * 3) + 1;
 
@@ -83,8 +90,8 @@ WheresWatson.prototype.gameStart = function() {
 		
 		this.randomX = parseInt(50 + (Math.random() * 860));
 	  this.randomY = parseInt(50 + (Math.random() * 460));
-		var rand = parseInt(Math.random() * this.nonWhites.length);
-		this.people[i] = this.gameEngine.add.sprite(this.randomX, this.randomY, this.nonWhites[rand]);
+		var rand = parseInt(Math.random() * this.others.length);
+		this.people[i] = this.gameEngine.add.sprite(this.randomX, this.randomY, this.others[rand]);
 		this.people[i].anchor.setTo(0.5, 0.5);
 		this.people[i].scale.setTo(this.faceSize, this.faceSize);
 		
@@ -102,8 +109,6 @@ WheresWatson.prototype.gameStart = function() {
 	this.difficultyTxt = "Difficulty: " + DIFFICULTY.ww.current;
 	this.difficulty = this.gameEngine.add.text(60, 30, this.difficultyTxt, this.difficultyStyle);
 
-	
-
 	this.timer = this.gameEngine.time.create(false);
 	this.timer.loop(1000, this.countdown, this);
 	this.timer.start();
@@ -114,7 +119,7 @@ WheresWatson.prototype.gameStart = function() {
 
 
 WheresWatson.prototype.countdown = function() {
-   this.counter--;
+  this.counter--;
 	this.counterTitle.destroy();
 
 	if(this.counter > 0){
@@ -122,22 +127,16 @@ WheresWatson.prototype.countdown = function() {
 	} else {
 		this.outcome = -1;
 	}
-
 };
 
 WheresWatson.prototype.update = function() {
-
-
 
 };
 
 
 function pressWatson(){
-
 	this.outcome = 1;
-	
 }
-
 
 WheresWatson.prototype.destroy = function() {
   // Reset vars
